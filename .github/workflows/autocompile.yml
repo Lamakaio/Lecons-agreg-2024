@@ -1,0 +1,67 @@
+name: Compile Modified C Files and Upload to Release
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use Ubuntu runner
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3
+
+    - name: Set up typst for Compilation
+      run: |
+        sudo apt-get install -y snapd
+        sudo snap install typst
+
+    - name: Get list of modified files
+      id: modified-files
+      run: |
+        # Get a list of files modified in the current commit
+        git diff --name-only ${{ github.event.before }} ${{ github.sha }} > modified_files.txt
+        cat modified_files.txt
+
+    - name: Compile C files if modified
+      run: |
+        # Loop over modified files and compile them if they are C files
+        while IFS= read -r file; do
+          if [[ "$file" == *.typ ]]; then
+            echo "Compiling $file..."
+            typst compile "$file" "${file%.typ}.pdf" "$file"  # Compile the .c file
+            ls -l "${file%.typ}.pdf"  # Verify that the binary is created
+          fi
+        done < modified_files.txt
+
+    - name: Get latest release
+      id: release
+      run: |
+        # Fetch the latest release ID
+        release_id=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r .id)
+        echo "Release ID: $release_id"
+        echo "release_id=$release_id" >> $GITHUB_ENV
+
+    - name: Create a new release if no release exists
+      if: steps.release.outputs.release_id == ''
+      run: |
+        # Create a new release if none exists
+        release=$(curl -s -X POST https://api.github.com/repos/${{ github.repository }}/releases \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -d '{"tag_name": "v1.0.0", "name": "v1.0.0", "body": "Release v1.0.0", "draft": false, "prerelease": false}')
+        echo "Release created: $release"
+
+    - name: Upload compiled binaries to the latest release
+      run: |
+        # Find and upload all .out files, even in subdirectories
+        while IFS= read -r file; do
+          if [[ "$file" == *.typ ]]; then
+            echo "Uploading "${file%.typ}.pdf"..."
+            curl -X POST https://uploads.github.com/repos/${{ github.repository }}/releases/${{ env.release_id }}/assets?name=$(basename "${file%.typ}.pdf") \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @"${file%.typ}.pdf"
+          fi
+        done < modified_files.txt
