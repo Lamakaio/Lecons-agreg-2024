@@ -57,6 +57,8 @@ jobs:
         echo "Release created: $release"
 
     - name: Upload compiled binaries to the latest release
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         # Find and upload all .out files, even in subdirectories
         while IFS= read -r file; do
