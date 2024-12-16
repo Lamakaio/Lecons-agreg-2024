@@ -62,9 +62,6 @@ jobs:
         while IFS= read -r file; do
           if [[ "$file" == *.typ ]]; then
             echo "Uploading "${file%.typ}.pdf"..."
-            curl -X POST https://uploads.github.com/repos/${{ github.repository }}/releases/${{ env.release_id }}/assets?name=$(basename "${file%.typ}.pdf") \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Content-Type: application/octet-stream" \
-              --data-binary @"${file%.typ}.pdf"
+            gh release upload ${{ steps.release.outputs.release_id }} "${file%.typ}.pdf"
           fi
         done < modified_files.txt

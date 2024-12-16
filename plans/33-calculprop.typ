@@ -96,7 +96,7 @@ Niveau : MP2I, MP2I
     - $(phi or psi)$, $(phi and psi)$, $(phi -> psi)$ et $(phi <-> psi)$ sont des formules
   ]
 
-#ex()[Exemple][
+#ex()[Exemple][ 
   $(x <-> (not (not x)))$ est une formule
 ]
 
