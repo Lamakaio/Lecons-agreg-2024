@@ -227,6 +227,6 @@ On définit inductivement la sémantique (ou valeur de vérité) $[phi]_sigma$ d
 
 = Le problème SAT (MPI)
 == Définition
-#def[Def][problème SAT][
+#def[Def][problème SAT][ 
 
 ]

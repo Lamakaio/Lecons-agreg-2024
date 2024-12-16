@@ -34,7 +34,7 @@ jobs:
         while IFS= read -r file; do
           if [[ "$file" == *.typ ]]; then
             echo "Compiling $file..."
-            typst compile "$file" "${file%.typ}.pdf" "$file"  # Compile the .c file
+            typst compile "$file" "${file%.typ}.pdf"  # Compile the .c file
             ls -l "${file%.typ}.pdf"  # Verify that the binary is created
           fi
         done < modified_files.txt
@@ -45,7 +45,7 @@ jobs:
         # Fetch the latest release ID
         release_id=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r .id)
         echo "Release ID: $release_id"
-        echo "release_id=$release_id" >> $GITHUB_ENV
+        echo "release_id=$release_id" >> $GITHUB_OUTPUT
 
     - name: Create a new release if no release exists
       if: steps.release.outputs.release_id == ''
