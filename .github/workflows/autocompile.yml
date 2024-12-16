@@ -22,7 +22,7 @@ jobs:
       id: modified-files
       run: |
         # Get a list of files modified in the current commit
-        git diff --name-only ${{ github.event.before }} ${{ github.sha }} > modified_files.txt
+        git diff --name-only HEAD~1 HEAD > modified_files.txt > modified_files.txt
         cat modified_files.txt
 
     - name: Compile C files if modified
