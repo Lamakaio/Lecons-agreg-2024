@@ -22,7 +22,7 @@ Construction inductive
 - Cas de base : variable dans un ensemble V, true, false
 - constructeurs (avec -> et <->)
 
-ex : `x <-> !!x`
+ex : `x <-> !!x` 
 rq : une formule est toujours finie.
 
 Exercice : Définir inductivement l'ensemble des variables d'une formule.
