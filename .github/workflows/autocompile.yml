@@ -64,6 +64,6 @@ jobs:
         while IFS= read -r file; do
           if [[ "$file" == *.typ ]]; then
             echo "Uploading "${file%.typ}.pdf"..."
-            gh release upload ${{ steps.release.outputs.release_id }} "${file%.typ}.pdf"
+            gh release upload 1.0.0 "${file%.typ}.pdf"
           fi
         done < modified_files.txt
