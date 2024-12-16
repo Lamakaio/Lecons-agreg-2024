@@ -212,7 +212,7 @@ On définit inductivement la sémantique (ou valeur de vérité) $[phi]_sigma$ d
 ]
 
 #def[Proposition][équivalence à une forme normale][
-  Toute formule $phi$ est équivalente à une formule en FNC et à une formule en FNC. De plus (à l'ordre des facteurs près) : 
+  Toute formule $phi$ est équivalente à une formule en FNC et à une formule en FNC. De plus (à l'ordre des  facteurs près) : 
   - si $phi$ n'est pas une tautologie, la FND est unique
   - si $not phi$ n'est pas une tautologie, la FNC est unique 
 ]
@@ -228,5 +228,5 @@ On définit inductivement la sémantique (ou valeur de vérité) $[phi]_sigma$ d
 = Le problème SAT (MPI)
 == Définition
 #def[Def][problème SAT][
-  
+
 ]
