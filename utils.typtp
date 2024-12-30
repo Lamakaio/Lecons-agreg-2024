@@ -1,0 +1,66 @@
+#let s = state("n", 0)
+#let n() = {
+  s.update(n => n+1)
+  context s.get()
+}
+
+#let s2 = state("d", 0)
+#let d() = {
+  s2.update(d => d+1)
+  context s2.get()
+}
+#let blk1(type, name, body) = box()[
+    #underline()[ _#type #n()_ \[#name\]\ ]
+    #block(
+    body,
+    width: 100%,
+    above:5pt,
+    inset: 5pt,
+    fill: luma(95%),
+    stroke: (left: 1.5pt + luma(30%))
+  )]
+
+#let blk2(type, body) = box()[
+  #underline()[ _#type #n()_\ ]
+  #block(
+  body,
+  width: 100%,
+  above:5pt,
+  inset: 5pt,
+  fill: luma(100%),
+)]
+
+#let dev(name) = {
+  block(
+  [Développement #d() : #name],
+  width: 100%,
+  above:5pt,
+  inset: 5pt,
+  fill: luma(100%),
+  stroke: (rest: 1.5pt + luma(30%))
+)
+}
+
+#let tabledeverite(vars, outs, formulas) = {
+  let dict = (:)
+  let t = (..vars.map(x => [$#x$]), ..outs)
+  for x in vars {
+    dict.insert(x, 0)
+  }
+  for i in range(0, calc.pow(2, vars.len())) {
+    let p1 = true
+    let res = formulas.map(f => [#eval(f, scope: dict)])
+    for (x, val) in dict.pairs() {
+      t.push([#val])
+      if p1 and val == 1 {
+        dict.at(x) = 0
+      }
+      if p1 and val == 0 {
+        dict.at(x) = 1
+        p1 = false
+      }
+    }
+    t += res
+  }
+  table(columns: vars.len() + formulas.len(), ..t)
+}

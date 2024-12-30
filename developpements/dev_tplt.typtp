@@ -1,0 +1,22 @@
+#let developpement(
+    titre: [], 
+    niveau: [], 
+    prerequis: [], 
+    doc
+) = {
+
+set page(paper: "a4")
+set document(title: titre)
+set heading(numbering: "I.1)")
+
+
+align(center, text(17pt)[
+  *#titre*
+])
+
+[Niveau : #niveau]
+align(right)[Prérequis : #prerequis]
+outline(indent:auto)
+
+doc
+}
