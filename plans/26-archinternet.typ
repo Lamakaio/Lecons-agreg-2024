@@ -134,3 +134,4 @@ Chaque hôte est identifié par une adresse sur 32 bits, souvent notée comme 4 
   192.168.0.1 est un adresse IPv4
 ]
 
+// TODO
