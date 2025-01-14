@@ -134,4 +134,84 @@ Chaque hôte est identifié par une adresse sur 32 bits, souvent notée comme 4 
   192.168.0.1 est un adresse IPv4
 ]
 
+#grid(
+  columns: (1fr, 1fr, 1fr, 1fr, 1fr), 
+  align: center, 
+  [Paquet IP : ], rect(width:100%)[préfixe], rect(width:100%)[adresse IP source], rect(width:100%)[adresse IP dest.], rect(width:100%)[données], [], [12 octets], [4 octets], [4 octets]
+)
+
+#blk1[Définition][Routage][
+  On appelle "routage" les principes et algorithmes qui régissent l'acheminenemt d'un paquet au bon endroit. Dans Internet, ce processus est fait au niveau de la couche IP.
+  
+  Les "routeurs" sont les machines qui servent de relai aux paquets. Ce sont les noeuds du graphe d'Internet.
+]
+
+Les routeurs gardent en mémoire des tables, pour savoir, pour chaque IP destination, à quel routeur faut-il l'envoyer ensuite. 
+
+#dev[Convergence de l'algorithme de Bellmann-Ford]
+
+#blk2[Problème][Les tables sont beaucoup trop grosses ! On ne peux pas stocker toutes les IP possibles dans une table. On utilise pour cela des sous-réseaux]
+
+#blk1[Définition][sous-réseaux][Un ensemble d'adresses IP, et donc à priori de machines, peuvent être reunies au sein d'un sous réseau. Il y a alors un certain nombre de bits au début de ces adresse IP qui est commun. Ce nombre de bit $n$ est noté $\/n$.]
+
+#blk2[Exemple][10.10.0.0/16 représente toutes les IP commençant par 10.10]
+
+== DNS
+#blk2[Motivation][
+  Le protocole IP permet à Internet d'acheminer un paquet en connaissant son adresse IP de destination. 
+  Mais quelle est l'adresse IP de _www.google.com_ ? 
+
+  Le protocole DNS est un protocol de la couche application pour convertir les URL en addresses IP. 
+]
+
+
+#figure(caption: [Exemple d'organistation DNS])[
+  #tree(rect[Racine], 
+    tree(rect[.fr], rect[wikipedia.fr]),
+    rect[.com],
+    tree(rect[.org], rect[agreg-info.org], rect[wikipedia.org])
+  )
+]<fig3>
+
+Les URL sont organisées hiérarchiquement, et chaque niveau a un serveur, qui garde en mémoire les adresses des serveurs du niveau suivant. 
+
+Tout le monde connait l'adresse de la racine. 
+
+#blk2[Exemple][
+  Un navigateur veut résoudre l'URL `wikipedia.fr`.
++ Il demande à la racine l'adresse du serveur `.fr`
++ Il demande au serveur `.fr` l'adresse de `wikipedia.fr`
++ Il recupère la page `wikipedia.fr`
+]
+
+== TCP
+TCP est un protocole de la couche transport, qui fait donc le lien entre machine et réseau. Il décide donc de ce qui doit être envoyé, renvoyé, quand, etc.
+
+#blk2[Principes][
+  TCP est un protocole de la couche transport, qui fait donc le lien entre machine et réseau. Il décide donc de ce qui doit être envoyé, renvoyé, quand, etc.
+
+  TCP apporte un certain nombre de garanties : 
+- les paquets arrivent : si un paquet est perdu, il peu être renvoyé. 
+- les paquets sont ordonnées : même si ils arrivent dans le mauvais ordre, le récépteur peut les réordonner 
+- les paquets sont justes : le contenu des paquets à la destination est le même qu'à la source
+
+TCP peut aussi gérer le flux de données afin de ne pas surcharger le réseau.
+]
+
+#dev[Fonctionnement des principes de base de TCP]
+
+== HTTP
+C'est le protocole de la couche applicative qui sert à échanger des pages web ! (avec sa variante sécurisée, HTTPS).
+
+#blk2[Principe][
+  Les paquets HTTP sont en général échangés via TCP. Ils contiennent un certain nombre d'information, par exemple la page échangée, la date, l'identité des deux partis...
+
+  HTTP fonctionne sur un principe de "méthodes", c'est à dire des actions que le client demande au serveur. Ces méthodes peuvent être, par exemple : 
+  - `GET` pour obtenir une page web 
+  - `POST` pour envoyer des données au serveur 
+
+  Le serveur répond ensuite avec un code de réussite (ou d'erreur) : 
+  - 200 : réussite de la requête
+  - 404 : la page n'existe pas
+]
 // TODO
