@@ -218,32 +218,32 @@ Pour prouver la correction partielle des algorithmes impératifs on utilise un i
 
 #blk2("Exemple")[
       #pseudocode-list(hooks: .5em, booktabs: true)[
-      *fusion $(l_1,l_2)$*
-        + res = tableau de taille $|l_1| + |l_2|$
+      *fusion $(L_1,L_2)$*
+        + res = tableau de taille $|L_1| + |L_2|$
         + $i = 0$
         + $j = 0$
-        + *Tant que* $i < |l_1| "et" j < |l_2| :$
-          + *si* $l_1[i] <= l_2[j]$ :
-            + res$[i+j]=l_1[i]$
+        + *Tant que* $i < |L_1| "et" j < |L_2| :$
+          + *si* $L_1[i] <= L_2[j]$ :
+            + res$[i+j]=L_1[i]$
             + $i = i+1$
           + *sinon* 
-            + res$[i+j]=l_2[j]$
+            + res$[i+j]=L_2[j]$
             + $j = j+1$
-        + *Tant que*  $i < |l_1|$ :
-          + res$[i+j]=l_1[i]$
+        + *Tant que*  $i < |L_1|$ :
+          + res$[i+j]=L_1[i]$
           + $i = i+1$
-        + *Tant que*  $j < |l_2|$ :
-            + res$[i+j]=l_2[j]$
+        + *Tant que*  $j < |L_2|$ :
+            + res$[i+j]=L_2[j]$
             + $j = j+1$
         + *renvoyer* res
     ]
     #pseudocode-list(hooks: .5em, booktabs: true)[
-      *tri_fusion $(l)$*
-        + *si* $|l| = 1$
-          + *renvoyer* l
+      *tri_fusion $(L)$*
+        + *si* $|L| <= 1$
+          + *renvoyer* $L$
         + *sinon* 
-          + s = $|l|$/2
-          + *renvoyer* fusion $("tri_fusion"(l[s:]), "tri_fusion"(l[:s]))$
+          + s = $|L|$/2
+          + *renvoyer* fusion $("tri_fusion"(L[s:]), "tri_fusion"(L[:s]))$
     ]
   ]
 
