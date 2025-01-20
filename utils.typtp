@@ -30,6 +30,17 @@
   fill: luma(100%),
 )]
 
+#let blk3(type, body) = box()[
+    #underline()[ _#type #n()_\ ]
+    #block(
+    body,
+    width: 100%,
+    above:5pt,
+    inset: 5pt,
+    fill: luma(95%),
+    stroke: (left: 1.5pt + luma(30%))
+  )]
+
 #let dev(name) = {
   block(
   [Développement #d() : #name],
