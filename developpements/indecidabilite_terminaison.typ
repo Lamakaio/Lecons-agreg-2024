@@ -27,7 +27,7 @@ entrées :
   - f: une chaine contenant le code source d'un programme
   - e: une chaine représentant des entrées pour le programme donnée par f
 sortie :\
-Pour toutes entrées, termine en temps fini en renvoyant true si l'éxecution du programme f sue les entrées e termine en temps dini, false sinon.
+Pour toutes entrées, termine en temps fini en renvoyant true si l'éxecution du programme f sue les entrées e termine en temps fini, false sinon.
 
 == Démonstration
 On cherche à montrer que ce problème de l'arrêt n'a pas de solution. \
@@ -41,7 +41,7 @@ let _ = if halts s Sys.arg.(1) then while true do () done
 + On execute halts sur son code
 - si l'execution de _./paradox e_ termine en temps fini, alors le programme déclenche une boucle infinie. On a donc une contradiction de la terminaison.
 - sinon si l'execution de _./paradox e_ ne termine pas, alors halts renvoie false donc le programme s'arrête immédiatement. On a donc encore une contradiction de la terminaison.
-Donc l'execution _./paradox e_  ne peut ni s'arrêter en temps fini, ni ne pas s'arrêter. Dinc le programme paradox ne peut pas exister car la fonction ```ml halts``` ne peux pas exister.
+Donc l'execution _./paradox e_  ne peut ni s'arrêter en temps fini, ni ne pas s'arrêter. Donc le programme paradox ne peut pas exister car la fonction ```ml halts``` ne peux pas exister.
 
 = Indécidabilité de la correction partielle.
 \
