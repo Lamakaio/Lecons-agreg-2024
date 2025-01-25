@@ -262,6 +262,9 @@ Néamoins ce n'est pas toujours facile. La conjecture de Syracuse est toujours u
 = outils
 \
 - Typer : l'utilisation du typage fort comme en Ocaml permet d'éviter de nombreuses erreurs
+- Programmmer défensivement : en vérifiant que les hypothès sont satisfaites (grace aux assert par exemple)
 - Tester : faire des tests tout au long de la programmation
 - Commenter : on déclare la spécification des fonctions et permet de rendre le code plus compréhensible et donc plus facile à débugguer
+- Décomposer les fonctions en sous-problèmes plus facile
+- Utiliser des débogueurs : comme valgrins, ou disponible dans certains IDE
 
