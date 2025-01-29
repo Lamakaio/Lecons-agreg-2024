@@ -5,7 +5,7 @@
 #import "@preview/codly-languages:0.1.1": *
 
 #show: developpement.with(
-  titre: [Indécidabilité de la terminaison et de la correction partielle], 
+  titre: [Indécidabilité de la terminaison et de la correction], 
   niveau: [MP2I], 
   prerequis: [Ocaml])
 
@@ -15,7 +15,7 @@
 \
 
 #blk3("Théorème")[
-  Il n'existe pas d'algorithme décidant pour tout algorithme si celui-ci termine en temps fini sur une entrée $e$.
+  Il n'existe pas de programme décidant pour tout programme si celui-ci termine en temps fini sur une entrée $e$.
 ]
 
 == Problème de l'arrêt en Ocaml
@@ -43,10 +43,10 @@ let _ = if halts s Sys.arg.(1) then while true do () done
 - sinon si l'execution de _./paradox e_ ne termine pas, alors halts renvoie false donc le programme s'arrête immédiatement. On a donc encore une contradiction de la terminaison.
 Donc l'execution _./paradox e_  ne peut ni s'arrêter en temps fini, ni ne pas s'arrêter. Donc le programme paradox ne peut pas exister car la fonction ```ml halts``` ne peux pas exister.
 
-= Indécidabilité de la correction partielle.
+= Indécidabilité de la correction.
 \
 #blk3("Théorème")[
-  Il n'existe pas d'algorithme décidant pour tout algorithme si celui-ci, lorsqu'il termine, renvoie un résultat validant la post-condition (avec une pré-condition valide).
+  Il n'existe pas de programme décidant pour tout programme si celui-ci, lorsqu'il termine, renvoie un résultat validant la post-condition (avec une pré-condition valide).
 ]
 
 == Indécidabilité de la trivialité d'un programme
@@ -77,4 +77,4 @@ Donc comme cette fonction résoud le problème de l'arrêt qui est indécidable,
 Donc la trivialité d'un programme est indécidable.
 
 Conclusion : \
-La terminaison et la correction partielle d'un algorithme sont indécidables.
+La terminaison et la correction d'un algorithme sont indécidables.

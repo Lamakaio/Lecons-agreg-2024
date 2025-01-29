@@ -42,6 +42,16 @@
         + *renvoyer* fusion $("tri_fusion"(L[s:]), "tri_fusion"(L[:s]))$
   ]
 
+= Présentation de l'algorithme
+Fusion : \
+Entrées : $L_1 "et" L_2$ deux liste triés \
+Sortie : une liste de taille $|L_1|+|L_2|$ contenant les éléments de $L_1 union.sq L_2$ triés. \
+\
+Tri_fusion : \
+Entrées : $L$ une liste \
+Sortie : L trié
+
+Dérouler un exemple facile ? Donner la complexité ?
 
 = Terminaison de fusion
 Prenons comme variant $|L_1|-i+|L_2|-j$. \
@@ -49,11 +59,6 @@ C'est bien un entier, positif, qui décroit strictement à chaque itération, en
 - soit i $<-$ i+1 donc $|L_1|-i<-|L_1|-i-1$
 - soit j $<-$ j+1 donc $|L_2|-j<-|L_2|-j-1$
 Donc fusion termine
-
-= Terminaison de tri_fusion
-On prend $|L|$ comme variant.\
-Les seuls appels récursifs à tri_fusion se font sur des listes de taille strictement inférieures, et tri_fusion s'arrête instantanément si $|L|<=1$. Donc il n'y a qu'un nombre fini d'appels récursifs.
-Or fusion termine, donc chaque appel récursif termine. Donc tri_fusion termine.
 
 = Correction partielle de fusion
 Spécification de fusion : Si $L_1 "et" L_2$ sont triés, alors fusion($L_1, L_2$) = $L_1 union.sq  L_2$ est trié.\ 
@@ -71,6 +76,11 @@ Donc $P_1 "et" P_2$ sont des invariants valides.
 Ainsi à la fin $P_1 "et" P_2$ sont vrai et comme la condition d'arrêt est à faux, on a $i=|L_1|$ ou $j=|L_2|$. Donc par nos invariants, une des deux listes est totalement dans res, et il ne manque à l'autre que ses éléments plus grand que ceux de res. On les ajoutes donc à res. À la fin de fusion, on a donc res$=L_1 union.sq L_2$ trié.\
 Donc fusion est partiellement correcte.
 On peut conclure que fusion est correcte.
+
+= Terminaison de tri_fusion
+On prend $|L|$ comme variant.\
+Les seuls appels récursifs à tri_fusion se font sur des listes de taille strictement inférieures, et tri_fusion s'arrête instantanément si $|L|<=1$. Donc il n'y a qu'un nombre fini d'appels récursifs.
+Or fusion termine, donc chaque appel récursif termine. Donc tri_fusion termine.
 
 = Correction partielle de tri_fusion
 $P(n):$ "tri_fusion(L) tri L pour toute liste de taille n"

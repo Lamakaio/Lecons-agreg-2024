@@ -14,45 +14,16 @@
   prerequis: [Récursivité])
 \
 
-= Introduction
-\
-La conjecture de Syracuse est un problème ouvert de mathématiques. \
-
-$"La suite u définie par :" display(cases(
-  U#sub[0] = a in NN,
-  U#sub[n] = display(cases(
-    display(U_n)/2 "si" U_n "pair",
-    3.U_n+1 "sinon"
-  )
-)))$
-\
-finit-elle toujours par le cycle 1,2,4 ? (toujours = pour tout a $in NN$)
-\
-
-
-#blk1("Algorithme", "Syracuse")[
-  Cela revient à savoir si l'algorithme Syracuse renvoie toujours 1, 2 ou 4.
-  #pseudocode-list(hooks: .5em, booktabs: true)[
-  *Syracuse (a) :*
-  + u = a
-  + *Tant que* u est une nouvelle valeur:
-    + *si* u est pair :
-      + u = u/2
-    + *sinon* :
-      + u = 3u+1
-  + renvoyer u
-  ]
-]
 = Terminaison
 \
-Une première question est de savoir si Syracuse finit (ne boucle pas à l'infini) sur toute entrée.
+Une première question est de savoir si un algorithme finit (ne boucle pas à l'infini) sur toute entrée.
 
 #blk3("Définition")[
   Prouver la terminaison d'un algorithme revient à prouver que pour toute entrée il termine.
 ]
 
 #blk3("Définition")[
-  On se limite parfois aux entrés valides (pour Syracuse, a $in NN^*$ par exemple).
+  On se limite parfois aux entrés valides.
 ]
 
 #blk2("Exemple")[
@@ -115,7 +86,8 @@ Pour prouver la terminaison on va utiliser la technique du variant.
 ]
 
 #blk1("Définition", "Ordre bien fondé")[
-  Soit E un ensemble, $<=$ est un ordre bien fondé, si toute partie non vide de E possède un plus petit élément.
+  Soit E un ensemble, $<=$ est un ordre bien fondé, s'il n'existe pas de suite infinie strictement décroissante d'éléments de 
+E.
 ]
 
 #blk3("Définition")[
@@ -136,7 +108,7 @@ Pour prouver la terminaison on va utiliser la technique du variant.
 
 = Correction partielle
 \
-Une autre question pour Syracuse est de savoir si on peut tomber sur un autre cycle que 1,2,4 et donc que notre fonction renvoie autre chose que 1,2 ou 4.
+Une autre question pour un algorithme est de savoir s'il renvoie bien le résultat attendu.
 
 #blk1("Définition", "Spécification")[
   On appelle spécification d'un algorithme deux propriétés :
@@ -145,17 +117,13 @@ Une autre question pour Syracuse est de savoir si on peut tomber sur un autre cy
 ]
 
 #blk2("Exemple")[
-  Pour Syracuse : 
-  - P1: "a $in NN^*$"
-  - P2: "syracuse (a) $in$ {1,2,4}"
+  Pour pgcd : 
+  - P1: "a $in NN$, b $in NN$"
+  - P2: "pgcd$(a,b)$ est le plus grand diviseur commun de a et b"
 ]
 
 #blk1("Définition", "Partiellement correct")[
   On dit qu'un algorithme est partiellement correct pour toute entrée vérifiant la pré-condition, s'il termine alors la sortie vérifie la post-condition.
-]
-
-#blk2("Exemple")[
-  L'algorithme pgcd de l'exemple 6 est partiellement correct si la pré-condition est "a $in NN$, b $in NN$" et la post-condition est "pgcd(a,b) renvoie le PGCD de a et b".
 ]
 
 == Correction partielle des algorithmes impératifs
@@ -249,17 +217,9 @@ Pour prouver la correction partielle des algorithmes impératifs on utilise un i
 
 \
 #dev[Correction totale de tri_fusion]
-
-Néamoins ce n'est pas toujours facile. La conjecture de Syracuse est toujours un problème ouvert.
-
-#blk3("Théorème")[
-  La correction partielle et la terminaison sont indécidables.
-]
-
 \
-#dev[Preuve du théorème 27]
 
-= outils
+= outils (à développer)
 \
 - Typer : l'utilisation du typage fort comme en Ocaml permet d'éviter de nombreuses erreurs
 - Programmmer défensivement : en vérifiant que les hypothès sont satisfaites (grace aux assert par exemple)
@@ -267,4 +227,48 @@ Néamoins ce n'est pas toujours facile. La conjecture de Syracuse est toujours u
 - Commenter : on déclare la spécification des fonctions et permet de rendre le code plus compréhensible et donc plus facile à débugguer
 - Décomposer les fonctions en sous-problèmes plus facile
 - Utiliser des débogueurs : comme valgrins, ou disponible dans certains IDE
+
+= Indécidabilité de la correction
+\
+Néamoins ce n'est pas toujours facile de montrer la correction d'un algorithme.
+\
+#blk2("Exemble")[
+La conjecture de Syracuse est un problème ouvert de mathématiques. \
+
+$"La suite u définie par :" display(cases(
+  U#sub[0] = a in NN,
+  U#sub[n] = display(cases(
+    display(U_n)/2 "si" U_n "pair",
+    3.U_n+1 "sinon"
+  )
+)))$
+\
+finit-elle toujours par le cycle 1,2,4 ? (toujours = pour tout a $in NN$)
+\
+]
+
+// #blk1("Algorithme", "Syracuse")[
+//   Cela revient à savoir si l'algorithme Syracuse renvoie toujours 1, 2 ou 4.
+//   #pseudocode-list(hooks: .5em, booktabs: true)[
+//   *Syracuse (a) :*
+//   + u = a
+//   + *Tant que* u est une nouvelle valeur:
+//     + *si* u est pair :
+//       + u = u/2
+//     + *sinon* :
+//       + u = 3u+1
+//   + renvoyer u
+//   ]
+// ]
+
+#blk3("Théorème")[
+  Il n'existe pas de programme qui détermine pour tout programme si celui-ci est correct sur toutes entrées valides.
+]
+
+#blk3("Théorème")[
+  La correction partielle et la terminaison sont indécidables.
+]
+\
+\
+#dev[Preuve du théorème 27]
 
