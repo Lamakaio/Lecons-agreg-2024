@@ -10,7 +10,7 @@
 #show: codly-init.with()
 #show: lecon.with(
   titre: [Leçon 1 : Exemple de méthodes et outils pour la correction des programmes], 
-  niveau: [NSI/MP2I], 
+  niveau: [MP2I], 
   prerequis: [Récursivité])
 \
 

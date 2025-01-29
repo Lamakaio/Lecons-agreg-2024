@@ -20,6 +20,8 @@
     stroke: (left: 1.5pt + luma(30%))
   )]
 
+#let def(name,body) = blk1("Définition", name,body)
+
 #let blk2(type, body) = box()[
   #underline()[ _#type #n()_\ ]
   #block(
@@ -29,6 +31,8 @@
   inset: 5pt,
   fill: luma(100%),
 )]
+
+#let ex(body) = blk2("Exemple", body)
 
 #let blk3(type, body) = box()[
     #underline()[ _#type #n()_\ ]

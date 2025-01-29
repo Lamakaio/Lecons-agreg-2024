@@ -2,6 +2,7 @@
     titre: [], 
     niveau: [], 
     prerequis: [], 
+    motivations: [],
     doc
 ) = {
 
@@ -16,6 +17,7 @@ align(center, text(17pt)[
 
 [Niveau : #niveau]
 align(right)[Prérequis : #prerequis]
+align(right)[Motivations : #motivations]
 outline(indent:auto)
 
 doc
