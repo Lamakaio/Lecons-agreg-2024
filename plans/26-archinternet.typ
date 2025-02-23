@@ -214,4 +214,3 @@ C'est le protocole de la couche applicative qui sert à échanger des pages web 
   - 200 : réussite de la requête
   - 404 : la page n'existe pas
 ]
-// TODO

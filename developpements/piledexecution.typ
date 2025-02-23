@@ -21,6 +21,8 @@ La pile (ou pile d'execution, ou pile d'appel) répond à ce besoin.
 La gestion de cette pile est effectuée par des instructions statiques, générées par le compilateur (ou écrites à la main dans le cas d'un programme assembleur). Une grande partie des procédures décrites ici sont des conventions, qui peuvent dépendre de l'architecture et du système d'exploitation (on appelle ces conventions l'ABI).
 
 //TODO petit schéma
+
+#text(fill: red)[Ajouter la pile, le tas, tout ça schéma classique]
 = Organisation de la pile 
 == Appel de fonction
 Le haut de la pile est pointé par le registre `sp`, stack pointer (qui peut avoir un autre nom selon l'architecture). Toutes les adresses qui dépassent `sp` sont considérées comme invalides. 
