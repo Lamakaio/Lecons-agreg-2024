@@ -2,7 +2,7 @@
 #import "@preview/codly:1.1.1": *
 #import "@preview/codly-languages:0.1.1": *
 #import "dev_tplt.typtp": developpement
-#import "@preview/syntree:0.2.0": tree
+#import "@preview/syntree:0.2.1": tree
 
 
 #show: developpement.with(

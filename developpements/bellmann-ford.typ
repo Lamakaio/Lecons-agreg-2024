@@ -1,5 +1,5 @@
 #import "@preview/cetz:0.3.0"
-#import "@preview/syntree:0.2.0": tree
+#import "@preview/syntree:0.2.1": tree
 #import "@preview/lovelace:0.3.0": *
 #import "../utils.typtp": *
 #import "dev_tplt.typtp": developpement

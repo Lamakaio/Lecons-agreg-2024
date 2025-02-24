@@ -1,6 +1,6 @@
 #import "../utils.typtp": *
 #import "dev_tplt.typtp": developpement
-#import "@preview/syntree:0.2.0": tree
+#import "@preview/syntree:0.2.1": tree
 
 #show: developpement.with(
   titre: [3-SAT est NP-complet], 
