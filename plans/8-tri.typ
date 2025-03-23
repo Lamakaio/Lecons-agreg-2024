@@ -210,34 +210,7 @@
   Le tri par tas utilise la structure de tas qui représente une file de priorité où le plus petit éléments se trouve à la racine.
 ]
 
-#blk3("Algorithme")[
-  #pseudocode-list(hooks: .5em, booktabs: true)[
-    *Tri_par_tas(E)*:
-    + t = tas-min vide
-    + n = len(E)
-    + L = []
-    + *Pour* i = 0 à n-1:
-      + entasser E[i] dans t
-    + *Pour* i = 0 à n-1:
-      + x = extraire min de t 
-      + ajouter x à la fin de L 
-    + *Retourner* L
-  ]
-]
-
-#blk2("Propriété")[
-  Pas stable, pas en place, pas online.
-]
-
-#blk2("Correction")[
-  Invariant de la seconde boucle : "L est trié et contient les i plus petits éléments de E".
-]
-
-#blk2("Compléxité")[
-  $O(n log(n))$
-]
-
-#dev("Compléxité du tri par tas ?")
+#dev("Tri par tas")
 
 = Applications
 == Algorithmes gloutons
