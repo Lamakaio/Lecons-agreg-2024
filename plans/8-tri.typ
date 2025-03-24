@@ -207,7 +207,8 @@
 == Tri par tas
 
 #blk3("Principe")[
-  Le tri par tas utilise la structure de tas qui représente une file de priorité où le plus petit éléments se trouve à la racine.
+  Le tri par tas utilise la structure de tas. Un tas est un arbre binaire étiqueté où la valeur de chaque nœud est supérieure ou égale à la valeur de chacun de ses fils. Cette abre est un arbre binaire presque complet à gauche.
+  Le tri par tas consiste à construire un tas à partir du tableau à trier, puis à itérer les opérations suivantes : échanger la racine et le dernier élément, diminuer la taille de 1 et restaurer la structure de tas.
 ]
 
 #dev("Tri par tas")
