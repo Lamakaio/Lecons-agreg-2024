@@ -10,18 +10,23 @@
 )
 
 \
-= Intro / Exemple
+= Intro 
 
 On implémente la structure de tas à l’aide d’un tableau indexé à partir de 1.
 Ainsi le fils gauche (resp. droit) du nœud en case i est en case 2i (resp. 2i + 1) et le père d’un nœud i est en case  $floor$i/2$floor.r$.
 
-#image("../img/tas_ex.png")
+#image("../img/tas_ex.png", width: 80%, )
+\
+\
 
 = Écriture de Entasse(T, i)
 
 == Algorithme
+\ 
 L’algorithme Entasse(T, i) transforme le sous-arbre de racine i en un tas, en supposant que les deux fils de i sont bien des tas.
 On compare l’élément d’indice i avec ses deux fils, on place le maximum des trois éléments à l’indice i en l’échangeant avec l’ancien élément qui était en i et ensuite on entasse de nouveau à partir de l’indice du fils qui a été modifié.
+\
+\
 
 #pseudocode-list(hooks: .5em, booktabs: true)[
   *Entasse (T, i) :*
@@ -65,7 +70,7 @@ On va commencer par construire des tas à partir des feuilles et remonter petit 
     + Entasse(T,i)
 ]
 #image("../img/tas_construit_1.png")
-#image("../img/tas_construit_2.png")
+#image("../img/tas_construit_2.png", width:70%)
 
 == Correction
 L’algorithme _Construit_ termine puisqu’il contient une boucle bornée dans laquelle on appelle la fonction Entasse qui termine. \
@@ -74,10 +79,12 @@ Les éléments enracinés en i pour i allant de T.taille à $floor$T.taille/2$fl
 
 
 == Complexité
+\
 La complexité de Construit est naïvement en $O(n log(n))$ car pour chaque élément on appelle Entasse, mais on peut calculer plus finement pour avoir une complexité
 linéaire.\
 
 Chaque nœud qui est de profondeur $p$ s’entasse en $O(h−p)$ et il y a au plus $2p$ nœuds de profondeur $p$ dans le tas. \
+\
 
 La complexité de Construit est en $O(n)$ car \
 
