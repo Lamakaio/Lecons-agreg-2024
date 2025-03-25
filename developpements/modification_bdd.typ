@@ -4,12 +4,12 @@
 #show: developpement.with(
   titre: [Modification d'une base de donnée], 
   niveau: [MP2I], 
-  prerequis: [Modèle relationnel])
+  prerequis: [Modèle relationnel, SQL])
 
 = Problème
-On a un magasin qui possède une base de donnée qui comporte des produits qui appartiennent à des catégories. On veut maintenant rajouter l'information de l'empreinte de ces produits. Pour pouvoir calculer quels produits ou quelle catégories emettent le plus.
+Un magasin possède une base de donnée pour garder en mémoire ses produits et les catégories auquels ils appartiennent. On veut maintenant rajouter des informations sur les impactes environnementaux de ces produits. Celà dans le but de pouvoir calculer quels produits ou quelles catégories ont le plus grand impact.
 
-Initialement on a le schéma relationnel suivant :
+Initialement on a le schéma relationnel suivant :\
 Categorie(#underline[idCat], nomCat)\
 Produit(#underline[idProduit], nomProduit, origine, \#idCat)
 
@@ -17,27 +17,31 @@ On suppose qu'on a une base de donnée équivalente au schéma et qu'on peut fai
 
 = Modification
 == Emission carbone
-Dans un premier temps on souhaite ajouter pour chaque produite son equivalent en émission carbone. Écrire la requête SQL et modifierle schéma relationnel en fonction.
+Dans un premier temps on souhaite, ajouter pour chaque produit son equivalent en émission carbone.\ Écrire la requête SQL et modifier le schéma relationnel pour intégrer cette donnée.
 
 ```sql
 ALTER TABLE Produit ADD EmissionCarbone float; 
 ```
-_Modifier en_ \
-Produit(#underline[idProduit], nomProduit, origine, \#idCat, EmissionCarbone)
+
+Produit(#underline[idProduit], nomProduit, origine, \#idCat, *EmissionCarbone*)
 
 == Consomation en eau 
-On veut maintenant ajouter la consomation en eau du produit. Faire les modifications.
+On veut maintenant ajouter la consomation en eau du produit. Faire les modifications nécessaire.
 
-On pourrait Séparer dans une table les notions d'impact du produit pour séparer les informations relative au produit et celle relative à son impact. On aurait alors une relation 1--1, ce qui n'aurait pas grande utilité. Pour rester le plus simple on fait comme pour l'émission carbone on ajoute un champs à Produit. 
+
+_On pourrait ici séparer dans une table les notions d'impact du produit, dans le but de séparer les informations relatives au produit et celle relative à son impact. On aurait alors une relation 1--1, ce qui n'aurait pas grande utilité. Pour rester le plus simple on fait comme pour l'émission carbone on ajoute un champs à Produit._ 
 
 ```sql
 ALTER TABLE Produit ADD ConsomationEau float; 
 ```
-_Modifier en_ \
-Produit(#underline[idProduit], nomProduit, origine, \#idCat, EmissionCarbone, ConsomationEau)
+
+
+Produit(#underline[idProduit], nomProduit, origine, \#idCat, EmissionCarbone, *ConsomationEau*)
 
 == Détail impact
-Maintenant on se rend compte que les impactes en eau et en emission carbones sont calculer sur 3 aspets différents et qu'on veut stocker ceux-là. Les données sont Agriculture, Embalage et Transport. Modifier la bade de donnée pour sauvegarder ces données.
+Maintenant on se rend compte que les impactes en eau et en emission carbones sont calculés sur 3 quantificateurs différents, qu'on veut stocker. Les données sont Agriculture, Embalage et Transport. L'impacte est donc la somme de ces 3 valeurs. Modifier la base de donnée pour sauvegarder ces données.
+
+_Ici on va devoir créer une nouvelle table pour stocker les données. On créé la table impactProduit qui va contenir ces données pour un type et un produit. On a donc une clé primaire sur type et idProduit. Il faut penser à supprimer les colonnes que l'on a créées précédemment._
 
 #image("../img/modification_bdd.png", width: 60%)
 
@@ -61,7 +65,7 @@ ALTER TABLE DROP column ConsomationEau;
 ```
 
 = Requête
- En supposant la base de donnée remplie de valeur, faites la requête permettant d'identifier la catégorie qui a la plus grande émission carbone.
+ En supposant la base de donnée remplie de valeur, faites la requête permettant d'identifier la catégorie qui a la plus grande émission carbone. Que changer pour avoir celle qui consomme le plus d'eau ?
 
 ```sql
 WITH carboneProduit as (
