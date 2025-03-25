@@ -51,12 +51,6 @@ Il y a deux concepts principaux dans le principe d'induction : les ensembles ind
   En général, on ne précise pas $Omega$, en admettant qu'il existe un ensemble suffisemment grand pour contenir tous nos objets. On définit alors les fonctions C sur l'ensemble I lui-même. 
 ]
 
-#blk2[Exemple][
-  Prenons $Beta = {[]}$ et $C = {x::l | x in NN, l "une liste"}$. 
-
-  On a alors, $forall n in NN$, $I_n$ est l'ensemble des listes de taille au plus $n$, et $I$ est simplement l'ensemble des listes finies. 
-]
-
 #blk1[Théorème][Preuve par induction][
   Soit $I$ un ensemble par induction sur $Omega$, défini par $Beta$ et $C$. 
   Soit un prédicat $P : I -> {"vrai", "faux"}$. 
@@ -66,13 +60,6 @@ Il y a deux concepts principaux dans le principe d'induction : les ensembles ind
   - pour tout $gamma in C$, $x_1, ..., x_n in I$, si tous les $P(x_i)$ sont vrais, il en découle que $P(gamma(x_1, ..., c_n))$ est vrai. 
 
   Alors pour tout $x in I$, $P(x)$ est vrai. 
-]
-
-#blk2[Exemple][
-  Soit l une liste décroissante, dont le dernier élément est 0. Montrons que tous les éléments sont positifs. 
-  - si $l = [0]$, tous les éléments sont positifs. 
-  - si $l = x::y::q$, avec $x in NN$ et $q$ une liste. Alors, on suppose que tous les éléments de $y::q$ sont plus grands que 0. En particulier, $y >= 0$.
-  Comme l est décroissante, $x >= y$, et donc $x$ est positif
 ]
 
 #blk2[Remarque][
@@ -91,3 +78,107 @@ Alors l'ensemble des objets de types `T` est exactement l'ensemble inductif déf
 Si on a une fonction récursive sur des objets de type `T`, on peut alors prouver par induction la correction de notre fonction !
 ]
 
+= Structures de données inductives 
+== Les listes chainées 
+
+En Ocaml, on peut définir les listes chainées de la manière suivante : 
+```Ocaml
+type 'a list = V | Cons of 'a * 'a list 
+```
+
+On a bien ici un cas de base (V), et des constructeurs : $C = {l -> "Cons"(x, l) | x "de type 'a"}$
+
+#blk2[Remarque][
+  On a un raccourci Ocaml qui autorise les constructeurs à prendre des arguments de types quelconques. Cela correspond, dans notre définition, à un ensemble de constructeur, pour chaque valeurs de ces arguments. 
+]
+
+#blk2[Remarque][
+  C'est le type `list` d'Ocaml ! 
+]
+
+#blk2[Exercice][
+  Définir inductivement la taille d'une liste chainée. 
+]
+
+== Arbres
+
+#blk1[Definition][Arbres binaires][
+  Soit A un ensemble. On défini inductivement les arbres binaires sur A par : 
+  - l'arbre vide F (cas de base)
+  - si $e in A$, $g, d$ des arbres binaires, $A(e, g, d)$ est un arbre binaire.
+
+  En Ocaml, cela donne 
+  ```Ocaml
+  type 'a arbre = F | Noeud of 'a * 'a arbre * 'a arbre
+  ```
+]
+
+#blk2[Exemple][
+  La hauteur d'un arbre se défini inductivement (ou récursivement en Ocaml) : 
+  ```Ocaml
+  let rec hauteur arb = match arb with 
+    |F -> 0
+    |Noeud (e, g, d) = 1 + max (hauteur g) (hauteur dans)
+  ```
+]
+
+#blk2[Exercice][
+  Prouver par induction la terminaison de cette fonction. 
+]
+
+#blk2[Exercice][
+  Les arbres généraux sont des arbres dont les noeuds peuvent avoir un nombre quelconque de fils. Comment peut-on définir ce type en Ocaml ? 
+]
+
+#dev[Exemple d'une preuve par induction : correction de l'insertion dans un tas]
+
+= Ensembles inductifs
+== Formules propositionelles 
+#blk1[Définition][Formules propositionelle][
+  Soit V un ensemble de variables. Une formule propositionelle est : 
+  - soit une variable $v in V$. (cas de base)
+  - soit les symboles $tack.b$ et $tack.t$. (cas de base)
+  - si f est une formule, $not f$ est une formule. 
+  - si f et g sont des formules, $f and g$, $f or g$, $f -> g$ et $f <-> g$ sont des formules. 
+]
+
+#blk1[Définition][Valuation][
+  On appelle valuation une fonction $sigma : V -> {0, 1}$
+]
+
+#blk1[Définition][Sémantique d'une formule][
+  On définit inductivement la sémantique (ou valeur de vérité) $[phi]_sigma$ d'une formule $phi$ pour une valuation $sigma$ comme : 
+- $[top]_sigma = 1$, $[bot]_sigma = 0$
+- $forall x in V, [x]_sigma = sigma(x)$
+- $[not phi]_sigma = 1 "ssi" [phi]_sigma = 0$
+- $[phi_1 and phi_2] = 1 "ssi" [phi_1]_sigma = 1 "et" [phi_2]_sigma = 1$
+- $[phi_1 or phi_2] = 1 "ssi" [phi_1]_sigma = 1 "ou" [phi_2]_sigma = 1$
+- $[phi_1 -> phi_2] = 1 "ssi" [phi_1]_sigma = 0 "ou" [phi_2]_sigma = 1$
+- $[phi_1 <-> phi_2] = 1 "ssi" [phi_1]_sigma = [phi_2]_sigma$
+
+On dit qu'une formule $phi$ est satisfiable si il existe une valuation $sigma$ telle que $[phi]_sigma = 1$
+]
+
+#blk2[Remarque][
+  Parfois, les structures inductives ne sont pas adaptées à des preuves ou des algorithmes. C'est le cas, par exemple, des algorithmes qui déterminent si une formule est satifiable : ils manipulent des formules sous "forme normale conjonctive", c'est à dire, "à plat".
+]
+
+#dev[Transformation d'une structure inductive en une structure "plate" : la transformation de Tseitin]
+
+== Expressions régulières 
+#def[Expression régulière][
+  Soit $Sigma$ un language. Une expression régulière sur ce language est : 
+  - $epsilon$, le mot vide, est une expression régulière (cas de base)
+  - si $a in Sigma$, $a$ est une expression régulière (cas de base)
+  - si $e$ et $f$ sont des expression régulière, $e*$, $e.f$ et $e|f$ aussi. 
+]
+
+#def[Language défini par une expression régulière][
+  Une expression régulière $e$ sur $Sigma$ permettent de definir inductivement un language sur $Sigma$ : 
+  - si $a in Sigma$, $L(a) = {a}$
+  - $L(epsilon) = {epsilon}$
+  - si e et f sont des expressions régulières, 
+    - $L(e*) = {m_1 ... m_n | m_i in L(e), n in NN}$
+    - $L(e.f) = {m_1 m_2 | m_1 in L(e), m_2 in L(f)}$
+    - $L(e | f) = L(e) union L(f)$ 
+]   
