@@ -162,3 +162,4 @@ for(int i=0; i<n−1; i++) incrementer(&s);
 
 (peut être ajouter la libération en arborescence si temps restant)
 
+(rajouter exemple/application)
