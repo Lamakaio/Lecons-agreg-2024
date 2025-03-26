@@ -96,7 +96,7 @@
 ]
 
 == Application : la recherche dichotomique
-
+//tortue 1er
 
 #blk3("Algorithme")[
   Entrées : E liste trié, x entier \
@@ -105,15 +105,14 @@
     *Recherche_dichotomique(E,x):*
     + *Si* len(E) = 0 :
       + *Renvoyer* Faux
-    + a = 0
-    + b = len(E)-1
-    + m = (a+b)/2
-    + *Tant que* E[m] $!=$ x et (b-a)>0 :
+    + g = 0
+    + d = len(E)-1
+    + *Tant que* g<=d :
+      + m = (a+b)/2
       + *Si* E[m] < x:
         + a = m+1
       + *Si* E[m] > x:
         + a = m-1
-      + m = (a+b)/2
     + *Si* E[m] = x:
       + *Renvoyer* Vrai
     + *Renvoyer* Faux
@@ -121,11 +120,11 @@
 ]
 
 #blk2("Terminaison")[
-  Variant de boucle : "b-a".
+  Variant de boucle : "g-d".
 ]
 
 #blk2("Correction")[
-  Invariant de boucle : "si x est dans E, alors son indice est enree a et b".
+  Invariant de boucle : "si x est dans E, alors son indice est enree g et d".
 ]
 
 #blk2("Compléxité")[
