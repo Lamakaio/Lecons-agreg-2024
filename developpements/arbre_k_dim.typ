@@ -74,9 +74,9 @@ Une fois notre arbre k-dimensionnel construit, comment trouver les k plus proche
       + *Si* len(pq) > k :
         + extraire min de pq
       + *Si* p[axe] < noeud.point[axe] :
-        + Visite(noeud.filsGauche, p, i+1, k, pq)
-      + *Sinon* :
         + Visite(noeud.filsDroit, p, i+1, k, pq)
+      + *Sinon* :
+        + Visite(noeud.filsGauche, p, i+1, k, pq)
 ]
 
 #pseudocode-list(hooks: .5em, booktabs: true)[

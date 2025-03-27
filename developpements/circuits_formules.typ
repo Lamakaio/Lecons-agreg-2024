@@ -46,7 +46,7 @@ Ainsi, pour construire la formule $phi$ correspondant à un fil : \
   Si on applique notre transformation sur l'exemple de la @fig1, on a : 
   $cases(gap: #0.5em,
     phi_1 = (x_1 and x_2) or x_3,
-    phi_2 = i_3)$
+    phi_2 = x_3)$
 
   
 ]

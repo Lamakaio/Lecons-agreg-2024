@@ -14,7 +14,7 @@
 = Introduction
 
 Qu'est ce que la congestion dans le protocole TCP ?
-La congestion est un afflux de trasmission de données qui provoque un encombrement.
+La congestion est un afflux de transmission de données qui provoque un encombrement.
 
 #image("../img/congestion_1.png", width: 80%)
 
@@ -38,7 +38,9 @@ En TCP chaque paquet est acquité. La non-réception d'un ack est un bon indicat
 
 Version naïf : 
 Envoie des paquet un à un. 
-#image("../img/congestion_3.png", width: 40%)
+
+_Faire schéma_
+
 On perd beaucoup de temps, on pourrait mieux utiliser la capacité du réseau.
 
 Version fenêtre d'envoie : 
@@ -57,7 +59,7 @@ On veut donc augmenter la fenêtre jusqu'à la congestion, puis on va essayer de
 === Première étape
 Objectif : avoir rapidement une idée de la capacité de charge du réseau.
 
-Pour celà on va augmenter la taille de la fenêtre multiplicativement à chaque RTT.
+Pour celà on va augmenter la taille de la fenêtre multiplicativement à chaque RTT. Jusqu'à la perte d'un paquet.
 #image("../img/congestion_5.png", width: 60%)
 
 === Deuxième étape
