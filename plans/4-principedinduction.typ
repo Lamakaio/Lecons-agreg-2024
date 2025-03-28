@@ -32,13 +32,17 @@ Il y a deux concepts principaux dans le principe d'induction : les ensembles ind
   - un sous ensemble $Beta subset Omega$, appelé "cas de base"
   - un ensemble de règle de combinaisons, ou constructeurs $C subset F(Omega^p -> Omega)_(p in NN)$
 
-  On défini alors récursivement, pour $n in NN$ l'ensemble inductif $I_n$ de profondeur $n$ : 
+  On défini alors $I$ comme le plus petit ensemble contenant $Beta$ et stable par les constructeurs. 
+]
+
+#blk1[Propriété][Définition alternative de l'induction][
+  On défini récursivement, pour $n in NN$ l'ensemble inductif $I_n$ de profondeur $n$ : 
   - si $n = 0$, $I_0 = Beta$
   - pour $n > 0$, $I_n = I_(n-1) union union.big_(gamma in C) gamma(I_(n-1))$
 
   Intuitivement, $I_n$ est l'ensemble obtenu en applicant les constructeurs aux cas de base au maximum $n$ fois. 
 
-  Alors, l'ensemble I défini par induction par les cas de base $Beta$ et les constructeurs $C$ est $I = union.big_(n in NN)I_n$, c'est à dire l'ensemble obtenu en appliquant les constructeurs aux cas de base un nombre fini de fois. 
+  Alors, l'ensemble $union.big_(n in NN) I_n$ est exactement l'ensemble inductif engendré par $Beta$ et $C$.
 ]
 
 #blk2[Exemple][
