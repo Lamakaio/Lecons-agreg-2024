@@ -60,18 +60,21 @@ CREATE TABLE ImpactProduit (
   PRIMARY KEY (type, idProduit)
 ); 
 
-ALTER TABLE DROP column EmissionCarbone;
-ALTER TABLE DROP column ConsomationEau;
+ALTER TABLE Produit DROP column EmissionCarbone;
+ALTER TABLE Produit DROP column ConsomationEau;
 ```
+
+_ Maintenant il est facile d'ajouter un indicateur comme transformation, ou un type d'impact_
 
 = Requête
  En supposant la base de donnée remplie de valeur, faites la requête permettant d'identifier la catégorie qui a la plus grande émission carbone. Que changer pour avoir celle qui consomme le plus d'eau ?
 
 ```sql
 WITH carboneProduit as (
-  SELECT idCat, idProduit, (I.agriculture + embalage + transport) as impactCabone
-    FROM ImpactProduit
-    WHERE type = 'EmissionCarbone'
+  SELECT P.idCat, I.idProduit, (I.agriculture + I.embalage + I.transport) as impactCabone
+    FROM ImpactProduit I
+    JOIN Produit P on P.idProd = I.idProd
+    WHERE I.type = 'EmissionCarbone'
 )
 
 SELECT nomCat, moyenne_carbone 
