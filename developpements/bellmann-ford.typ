@@ -26,25 +26,23 @@ L'avantage de l'algorithme de Bellmann-Ford est qu'il est possible de le faire d
 == L'algorithme centralisé
 #figure(caption: [Algorithme de Bellmann-Ford centralisé], kind: "algorithme", supplement: [Algorithme])[
 #pseudocode-list(hooks: .5em, title: smallcaps[BELLMANN-FORD ( G )], booktabs: true)[
-  #underline()[Entrée] : $G = (S, V, w)$ un graphe pondéré non orienté avec $V$ le tableau des listes d'adjacence.
+  #underline()[Entrée] : $G = (S, V, w)$ un graphe pondéré non orienté avec $V$ le tableau des listes d'adjacence, w un sommet.
   
   #underline()[Sortie] : `prochain-saut`, un tableau indéxé par $(s_1, s_2) in S times S$, contenant le prochain noeud dans le chemin le plus court de $s_1$ à $s_2$.
   
-  + `prochain-saut` $<-$ Tableau de taille $S times S$
-  + `D` $<-$ Tableau de taille $S times S$
-  + *for* $(u, v) in S$ *do*
-    + `prochain-saut[u][v]` $<-$ None
-    + `D[u][v]` $<-$ $+infinity$
+  + `prochain-saut` $<-$ Tableau de taille $|S|$
+  + `D` $<-$ Tableau de taille $|S|$
   + *for* $u in S$ *do*
-    + `D[u][u]` $<-$ 0
+    + `prochain-saut[u]` $<-$ None
+    + `D[u]` $<-$ $+infinity$
+  + `D[w]` $<-$ 0
   + *do* 
     + *for* $u in S$ *do*
       + *for* $v in V[u]$ *do*
-        + *for* $s in S$ *do*
-          + *if* $D[v][s] + w(u, v) < D[u][s]$ *then*
-            + `prochain-saut[u][s]` $<-$ `v`
-            + `D[u][s]` $<-$ `D[v][s]` + `w(u, v)`
-    + *loop while* Il y a eu une modification à la dernière itération.
+          + *if* $D[v] + w(u, v) < D[u]$ *then*
+            + `prochain-saut[u]` $<-$ `v`
+            + `D[u]` $<-$ `D[v]` + `w(u, v)`
+    + *loop while* Il y a eu une modification à la dernière itération (au plus $|S|-1$ fois).
 ]
 ]
 
