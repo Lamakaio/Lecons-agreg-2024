@@ -6,7 +6,7 @@
     doc
 ) = {
 
-set page(paper: "a4")
+set page(paper: "a4", numbering: "1")
 set document(title: titre)
 set heading(numbering: "I.1)")
 
