@@ -91,5 +91,28 @@ Les circuits séquentiels forment une généralisations des circuits combinatoir
 
 == Mémoire virtuelle
 
+#blk1("Principe", "Mémoire virtuelle")[
+  
+  #grid(columns: (1fr, 1fr),
+    image("../img/memoire_virt.png", width: 60%),
+    "
+    Chaque processus possède une mémoire virtuelle alloué à sa création. Le but de celle-ci est de faire croire au processus qu'il a accès à toute la mémoire, et que cette mémoire est donc contigue. Cela permet donc une protection de la mémoire (chaque processus n'a pas accès à la mémoire qui n'est pas la sienne), l'utilisation de la mémoire virtuelle permet aussi d'utiliser la mémoire du disque comme extension de la mémoire vive.
+    
+    Chaque bloque mémoire de la mémoire virtuelle est un lien vers un endroit de la mémoire physique (RAM ou disque)"
+   )
+]
 
+#blk1("Principe", "Organisation de la mémoire d'un programme")[
+  #image("../img/memoire_prog.png", width: 40%)
 
+]
+
+#dev[Gestion d'appels de fonction grâce à la pile d'éxecution]
+
+#blk1("Principe", "Table des pages")[
+  En pratique, les bloques mémoire de la mémoire virtuelle sont découper tous en bloque de la même taille appelées pages (environ 4Ko). Ce mécanisme sert à réduire la fragmentation externe, mais créer de la fragmentation interne (qui pose moins de problème). \
+  La traduction entre les adresses virtuelles et physique ce fait par une table de traduction appelé la table des pages.
+  #image("../img/table_pages.png", width: 70%)
+]
+
+#dev[L'utilisation de fork et de Copy-on-Write pour gérer la mémoire de plusieurs fils d'éxecutions]
