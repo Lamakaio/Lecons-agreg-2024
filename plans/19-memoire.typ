@@ -14,8 +14,9 @@
   niveau: [L3], 
   prerequis: [Circuit combinatoires])
 
-= Circuit séquentiels
+= Mémoire physique en architecture des ordinateurs
 
+== Circuits séquentiels
 À l'aide de portes logique nous avons pu voir comment construre des circuits combinatoires. 
 Les circuits séquentiels forment une généralisations des circuits combinatoires permettant la mémorisation d'informations.
 
