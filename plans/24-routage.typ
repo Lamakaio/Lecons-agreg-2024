@@ -62,8 +62,10 @@ On fait une analogie entre Internet et la Poste.
 #blk1("Définition", "Protocole TCP")[
   Transmission Control Protocol.
   Ce protocole décide comment doivent être envoyées les données, sur quel réseau et quand, et si les données doivent être renvoyées. Les données sont découpées en paquets.
-  + principe TCP (connexion par triple poigné de mains...)
 ]
+
+PRINCIPE TCP (connexion par triple poigné de mains...)
++ EXEMPLE TRANSMISSION MESSAGE EN TCP 
 
 #dev[Gestion de la congestion par TCP]
 
