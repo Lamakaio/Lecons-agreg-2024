@@ -27,7 +27,7 @@ On cherche à optimiser le chemin critique, en particulier sur la propagation de
 
 = Pistes de solutions
 
-Exemple d'addition : \ \
+Exemple d'addition : (à dérouler au tableau) \ \
 $&1 1 1 0 1 1 1 1 \
 + &0 1 1 0 0 0 0 1 \
 &------\
