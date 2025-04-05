@@ -56,9 +56,9 @@ c_3 = g_2 + p_2 dot c_2 = g_2 + p_2 dot g_1 + p_2 dot p_1 dot c_1\
 ...\
 c_(i+1) = g_i + p_i dot g_(i-1) + p_i dot p_(i-1) dot g_(i-2) + ... + p_i dot ... dot p_2 dot c_1
 $\
-On à i+1 termes. et $p_i dot ... dot p_2 dot c_1$ possède i facteurs.
+On à i+1 termes. et le dernier terme $p_i dot ... dot p_2 dot c_1$ possède i facteurs.
 
-On représente ces portes : 
+On peut représenter le dernier terme par les portes : 
 #image("../img/additionneur_2.png", width: 40%)
 On a i-1 portes et le chemin critique est de i-1.
 
@@ -80,10 +80,3 @@ On arrive bien à un chemin critique de 6 portes traversées (5 ici + 1 pour cal
 
 #image("../img/additionneur_4.png", width: 60%)
 
-L'utilité de calculer la retenue de cette façon est d'ensuite utiliser le calcul de celle ci pour réduire le chemin critique d'un grand additionneur en le décomposant en blocs.
-
-Par exemple pour un additionneur 8 bits avec 4 blocs d'additionneur à anticipation de retenue.
-
-#figure(caption: "Additionneur 8b à saut de retenue par blocs, avec k = 2")[
-  #image("../img/csb_adder_8b.svg")
-]
