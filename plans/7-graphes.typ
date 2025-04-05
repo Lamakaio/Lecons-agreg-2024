@@ -247,7 +247,7 @@ Dans un premier temps on cherche tous les plus courts chemins, avec leurs poids,
   L'algorithme utilise une heuristique admissible qui permet de résoudre le plus court chemin entre une source et une destination en parcourant moins de sommet que Dijkstra. La file de priorité n'est plus basé sur la distance d'un sommet depuis la source mais à cette distance additionner à l'heuristique.
 ]
 
-#dev[Exemple et compléxité de l'algorithme A\*]
+#dev[Exemple de l'algorithme A\*]
 
 == De tous les sommets à tous les sommets
 On cherche maintenant un algorithme plus efficace pour avoir accès à tous les plus courts chemins d'un graphe (de toutes les sources à tous les sommets).
