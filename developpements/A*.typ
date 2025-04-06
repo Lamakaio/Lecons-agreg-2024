@@ -42,23 +42,43 @@ On cherche donc à prendre en compte la position de la sortie.
 Pour prendre en compte la position de la destination on va ajouter une heuristique. Mais comment la choisir ?
 
 *Heuristique admissible* : \
-La fonction d'heuristique h est dite admissible si, pour tout sommet $v$ tel qu'il existe un chemin de $v$ à _dst_ de longueur $d$, alors $h(v)<=d.$ _Autrement dit une heuristique admissible ne surestime jamais la distance à la destination._ On note l'hypothèse $h($_dst_$)=0$.
+La fonction d'heuristique $h$ est dite admissible si, pour tout sommet $v$ tel qu'il existe un chemin de $v$ à _dst_ de longueur $d$, alors $h(v)<=d.$ _Autrement dit une heuristique admissible ne surestime jamais la distance à la destination._ On note l'hypothèse $h($_dst_$)=0$.
 
 *Choix de l'heuristique* : \
-On pourrait prendre la  distance euclidienne entre un sommet et _dst_, cependant ici on ne peut pas couper à travers les murs. On va donc prendre la distance de Manathan. La distane de Manathan est calculé par : $d(a,b) = |x_b-x_a|+|y_b-y_a|$
+On pourrait prendre la  distance euclidienne entre un sommet et _dst_, cependant ici on ne peut pas couper à travers les murs. On va donc prendre la distance de Manathan. La distane de Manathan est calculé par : _dm_$(a,b) = |x_b-x_a|+|y_b-y_a|$.\
+On prend donc l'heuristique : \
+$h(u) = $_dm_$(u,$_dst_$)$
 
-_Maintenant qu'on a notre fonction pour calculé la distance entre deux sommets on définit l'heuristique._
+*Heuristique monotone :*\
+La fonction $h$ est dite monotone si pour tout arc $u->^d v$ du graphe, on a l'inégalité $h(u)<= d+h(v)$.
+La distance de Manathan est monotone. 
 
-*Heuristique monotone*
-
-On applique A\* qui est Dijkstra mais avec heuristique à la place de distance pour la file de priorité.
+*Résolution :*\
+On pose l'heuristique total : _ht_$(u) = h(u) + d(u)$ avec $d(u)$ le poids du chemin parcouru depuis le sommet _src_ jusqu'à $u$.\
+On applique A\* qui est l'algorithme de Dijkstra mais avec une file de priorité sur le résultat de l'heuristique total _ht_.
 
 #figure(caption: "Recherche du plus court chemin via A*")[
   #image("../img/a__3.png")
 ]
 _Expliquer les valeurs distance src + distance de Manathan de dst et tout et tout_
+\
+\
+#blk3("Propriété")[
+  Une fonction heuristique monotone est admissible
+]
 
-*Heuristique monotone est admissible :*
-Montrons que heuristique monotone est admissible
+#blk2("Preuve")[
+  On cherche à montrer que pour tout chemin \
+  $v_O ->^(d_0)v_1 ->^(d_1)v_2 ... v_n->^(d_n)$ _dst_,   on a $h(v_0)<=d_0+d_1+...+d_n$. \
+  On procède par récurrence sur $n$. 
+  - Pour $n = 0$ : $h($_dst_$)=0$ par définition
+  - Pour $n > 0$ : on a $h(v_0)<=d_0+h(v_1)$ car h est monotone. Par hypothèse de récurrence, on a $h(v_1)<=d_1+...+d_n$ et donc $h(v_0)<=d_0+d_1+...+d_n$ par transitivité.
+]
 
-_Parler de la compléxité qui n'est pas forcément mieux_
+
+*Compléxité :*
+L'heuristique monotone assure une compléxité polynomial de l'algorithme A\*. \
+Lorsqu'un sommet sort de la file de priorité, on connait sa distance à la source, s'il vient à ressortir plus tard sa distance ne sera pas améliorée et donc celle de ses voisins non plus, qui ne seront donc pas remis dans la file.\
+Donc chaque sommet peut occasionnerl'insertion de tous ses voisins dans la file la première fois qu'il est considéré, pour un total de $O(|A|)=O(|S|²)$. La sortie de chacun de ses éléments occasionne de nouveau l'examen de tous ses voisins, soit $O(|S|³)$. Si l'insertion et l'extraction dans une file de prioritése fait en compléxité logarithmique, on a $O(|S|³log |S|)$ dans le pire cas.
+
+_Cependant en général grâce à l'optimisation de A\* on parcours moins de sommet qu'avec Dijkstra comme montrer sur l'exemple_
