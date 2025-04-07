@@ -222,7 +222,7 @@ Dans un premier temps on cherche tous les plus courts chemins, avec leurs poids,
     + *Tant que* modifie :
       + modifie = faux
       + *Pour* u dans S :
-        + *Pour* v dans les voisins de i :
+        + *Pour* v dans les voisins de u :
           + dv = distance[v] + poids de l'arc u$->$v
           + *Si* dv < distance[u] :
               + distance[u] = dv
