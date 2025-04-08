@@ -12,7 +12,12 @@
 #show: lecon.with(
   titre: [Leçon 7 : Accessiblité et chemins dans un graphe. Applications.], 
   niveau: [Terminal (Parcours) / Prépa], 
-  prerequis: [Graphes (définitions et représentations)])
+  prerequis: [Graphes (définitions et représentations)],
+  motivations: [Réseaux, Automates, Jeux])
+
+
+#text(fill:red)[RAJOUTER APPLICATIONS COMME AUTOMATES OU AUTRES JSP QUOI]\
+#text(fill:red)[PARLER DES IMPLÉMENTATIONS MATRICE OU LISTE D'ADJACENCE CAR CA CHANGE LES COMPLÉXITÉS]
 
 
 = Rappels
@@ -49,7 +54,7 @@
 ]
 
 == Parcours en profondeur
-#blk2("Idée de l'algorithme")[
+#blk2("Principe de l'algorithme")[
   On part de $s$ tant qu'il est possible de progresser en suivant un arc on le fait, et sinon on fait machine arrière pour considérer d'autres arcs. On sauvegarde les sommets vus pour ne pas boucler en cas de cycle.
 ]
 
@@ -72,7 +77,7 @@
 ]
 
 #ex[
-  PRENDRE EXEMPLE tortue
+  EXEMPLE FACILE
 ]
 
 #blk2("Compléxité")[$O(S+A)$]
@@ -97,7 +102,7 @@
 ]
 
 #ex[
-  PRENDRE EXEMPLE tortue
+  FAIRE EXEMPLE BASIQUE
 ]
 
 = Applications autour des parcours
@@ -127,11 +132,11 @@
   Graphe qui comporte une seule composante fortement connexe.
 ]
 
-#blk1("TP", "")[
+#blk1("TP", "Kosaraju-Saphir")[
   TP guidé pour implémenté de l'algorithme de Kosaraju-Saphir qui renvoie les composantes fortements connexe d'un graphe orienté.
 ]
 
-== Ordonnancement : tri topologique
+== Ordonnancement : tri topologique (À RÉDUIRE)
 
 #blk1("Problème", "Ordonnancement")[
   On a une liste de tâches à effectuer, certaines doivent attendre la fin de l'éxecution d'autres tâches. On souhaite savoir dans quel ordre effectuer les tâches.
@@ -143,10 +148,6 @@
 
 #def("Tri topologique")[
   Soit G un graphe orienté acyclique. Un tri topologique est une liste ordonnée de ses sommets telle que, pour tout arc $u ->v$ dans le graphe, le sommet $u$ apparait avant le sommet $v$ dans la liste.
-]
-
-#ex[
-  VOIR TORTUE
 ]
 
 #blk1("Algorithme", "Ordre postfixe")[
@@ -169,6 +170,50 @@ On concidère des graphes pondérés, les arcs sont donc associés à une valeur
 == D'un sommet à tous les autres
 
 Dans un premier temps on cherche tous les plus courts chemins, avec leurs poids, d'une source $s$ à tous les autres sommets du graphes.
+
+
+=== Bellman-Ford
+
+#blk3("Principe de l'algorithme")[
+  Cet algorithme utilise le principe de programmation dynamique. On a les formules : \
+  - $d[t,k]$ : est la distance du sommet s à t avec un chemin qui contient au plus k arcs
+  - $d[s,0]=0$
+  - $d[t,0]= + infinity$ pour $t≠s$ et $$
+  - $d[t,k]=$min ${ d[t,k−1], min_(u->t)(d[u,k−1]+w(u,t))}$ \ 
+    où $w(u,t)$ est le poids de l'arrête $u->t$
+]
+#blk3("Algorithme")[
+  #pseudocode-list(hooks: .5em, booktabs: true)[
+    *BELLMANN-FORD ( G, s ) :*
+    + distance $<-$ Tableau de taille $|S|$ initialisé à $+infinity$
+    + distance[s] $<-$ 0
+    + modifie = vrai
+    + *Tant que* modifie :
+      + modifie = faux
+      + *Pour* u dans S :
+        + *Pour* v dans les voisins de u :
+          + dv = distance[v] + poids de l'arc u$->$v
+          + *Si* dv < distance[u] :
+              + distance[u] = dv
+              + modifie = vrai
+    + *Retourner* distance
+  ]
+]
+
+#blk2("Compléxité")[
+  $O(|S|dot|A|)$ 
+]
+
+#blk2("Remarque")[
+  L'algorithme de Bellman-Ford permet d'avoir certains arc à poids négatifs. Il ne faut juste pas de cycle à poids négatifs pour ne pas avoir de boucle infinie.
+]
+
+#blk1("Application","Routage d'un réseau")[
+  L'algorithme de Djikstra est utilisé dans le protocole OSPF (Open Shortest Path First) et l'algorithme de Bellman-Ford est utilisé dans le protocole RIP (Routing Information Protocol).\
+  Ces protocoles servent à chavoir sur quels liens les routeurs vont communiquer pour avoir des chemins les plus courts.
+]
+#dev[Bellman-Ford décentralisé]
+
 
 === Dijkstra
 
@@ -203,51 +248,13 @@ Dans un premier temps on cherche tous les plus courts chemins, avec leurs poids,
   Si les opérations insérer et extraire de la file de priorité sont logarithmique, on a |A| insertion et |A| extraction dans la file de priorité donc on a une compléxité en  $O(|A| log |A|)$.
 ]
 
-=== Bellman-Ford
-
-#blk3("Principe de l'algorithme")[
-  Cet algorithme utilise le principe de programmation dynamique. On a les formules : \
-  - $d[t,k]$ : est la distance du sommet s à t avec un chemin qui contient au plus k arcs
-  - $d[s,0]=0$
-  - $d[t,0]= + infinity$ pour $t≠s$ et $$
-  - $d[t,k]=$min ${ d[t,k−1], min_(u->t)(d[u,k−1]+w(u,t))}$ \ 
-    où $w(u,t)$ est le poids de l'arrête $u->t$
-]
-#blk3("Algorithme")[
-  #pseudocode-list(hooks: .5em, booktabs: true)[
-    *BELLMANN-FORD ( G, s ) :*
-    + distance $<-$ Tableau de taille $|S|$ initialisé à $+infinity$
-    + distance[s] $<-$ 0
-    + modifie = vrai
-    + *Tant que* modifie :
-      + modifie = faux
-      + *Pour* u dans S :
-        + *Pour* v dans les voisins de u :
-          + dv = distance[v] + poids de l'arc u$->$v
-          + *Si* dv < distance[u] :
-              + distance[u] = dv
-              + modifie = vrai
-    + *Retourner* distance
-  ]
-]
-
-#blk2("Compléxité")[
-  $O(|S|dot|A|)$
-]
-
-=== Applications
-#blk2("Routage d'un réseau")[
-  L'algorithme de Djikstra est utilisé dans le protocole OSPF (Open Shortest Path First) et l'algorithme de Bellman-Ford est utilisé dans le protocole RIP (Routing Information Protocol).\
-  Ces protocoles servent à chavoir sur quels liens les routeurs vont communiquer pour avoir des chemins les plus courts.
-]
-#dev[Bellman-Ford décentralisé]
-
-#def("A*")[
+#blk1("Algorithme","A*")[
   L'algorithme A\* est une amélioration de l'algorithme de Dijkstra pour les problèmes où l'on dispose des informations sur la destination. Exemples : point GPS, sortie d'un labyrinthe. \
   L'algorithme utilise une heuristique admissible qui permet de résoudre le plus court chemin entre une source et une destination en parcourant moins de sommet que Dijkstra. La file de priorité n'est plus basé sur la distance d'un sommet depuis la source mais à cette distance additionner à l'heuristique.
 ]
 
 #dev[Exemple de l'algorithme A\*]
+
 
 == De tous les sommets à tous les sommets
 On cherche maintenant un algorithme plus efficace pour avoir accès à tous les plus courts chemins d'un graphe (de toutes les sources à tous les sommets).
@@ -262,20 +269,20 @@ On cherche maintenant un algorithme plus efficace pour avoir accès à tous les 
   - $W^k_(i j) = min(W^(k-1)_(i j),W^(k-1)_(i k) + ,W^(k-1)_(k j))$
 ]
 
-#blk1("Algorithme", "Floyd-Warshall")[
-   #pseudocode-list(hooks: .5em, booktabs: true)[
-    *Floyd-Warshall ( G ) :*
-    + distance $<-$ matrice de taille $|S|times|S|$ initialisé à $+infinity$ 
-    + on remplie distance des poids des arcs présents
-    + *Pour* k de 0 à |S|-1 :  
-      + *Pour* i de 0 à |S|-1 : 
-        + *Pour* j de 0 à |S|-1 : 
-          + x = distance[i][k] + distance[k][j]
-          + *Si* x < distance[i][j] :
-              + distance[i][j] = x
-    + *Retourner* distance
-  ]
-]
+// #blk1("Algorithme", "Floyd-Warshall")[
+//    #pseudocode-list(hooks: .5em, booktabs: true)[
+//     *Floyd-Warshall ( G ) :*
+//     + distance $<-$ matrice de taille $|S|times|S|$ initialisé à $+infinity$ 
+//     + on remplie distance des poids des arcs présents
+//     + *Pour* k de 0 à |S|-1 :  
+//       + *Pour* i de 0 à |S|-1 : 
+//         + *Pour* j de 0 à |S|-1 : 
+//           + x = distance[i][k] + distance[k][j]
+//           + *Si* x < distance[i][j] :
+//               + distance[i][j] = x
+//     + *Retourner* distance
+//   ]
+// ]
 
 #blk2("Compléxité")[
   $O(|S|³)$
@@ -283,5 +290,9 @@ On cherche maintenant un algorithme plus efficace pour avoir accès à tous les 
 
 #blk2("Remarque")[
   Si on appliquait Dijkstra pour chaque sommet on aurait un algorithme en $O(|S|² log |A|)$
+]
+
+#blk2("TP")[
+  Effectuer une implémentation de Dijkstra et Floyd-Warshall et comparer les performances des deux algorithmes.
 ]
 
