@@ -67,7 +67,7 @@ ALTER TABLE Produit DROP column ConsomationEau;
 _ Maintenant il est facile d'ajouter un indicateur comme transformation, ou un type d'impact_
 
 = Requête
- En supposant la base de donnée remplie de valeur, faites la requête permettant d'identifier la catégorie qui a la plus grande émission carbone. Que changer pour avoir celle qui consomme le plus d'eau ?
+ En supposant la base de donnée remplie de valeur, faites la requête permettant d'identifier la catégorie qui a la plus grande émission carbone en moyenne. Que changer pour avoir celle qui consomme le plus d'eau ?
 
 ```sql
 WITH carboneProduit as (
