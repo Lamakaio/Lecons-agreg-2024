@@ -70,6 +70,11 @@ _ Maintenant il est facile d'ajouter un indicateur comme transformation, ou un t
 = Requête
  En supposant la base de donnée remplie de valeur, faites la requête permettant d'identifier la catégorie qui a la plus grande émission carbone en moyenne. Que changer pour avoir celle qui consomme le plus d'eau ?
 
+Décomposition en sous-problème : 
+- Création d'une table qui contient pour chaque produit son idCatégorie et son total d'equivalent CO2
+- Récupérer la moyenne pour chaque catégorie des emission carbone
+- renvoyer le résultat final
+
 ```sql
 WITH carboneProduit as (
   SELECT P.idCat, I.idProduit, (I.agriculture + I.embalage + I.transport) as impactCabone
@@ -78,13 +83,12 @@ WITH carboneProduit as (
     WHERE I.type = 'EmissionCarbone'
 )
 
-SELECT nomCat, moyenne_carbone 
+SELECT idCat, moyenne_carbone 
 FROM (
   SELECT idCat, AVG(impactCabone) as moyenne_carbone
   FROM carboneProduit
   GROUP BY idCat
 ) 
-JOIN Categorie C on C.idCat = idCat
 ORDER BY moyenne_carbone desc 
 LIMIT 1;
 ```
