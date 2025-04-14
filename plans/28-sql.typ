@@ -203,7 +203,8 @@ Comme énoncer on peut faire des produit cartésien de plusieurs table pour les 
   - MIN(): renvoie la plus petite valeur 
   - MAX(): renvoie la plus grande valeur
   - AVG(): renvoie la moyenne
-  - SUM(): renvoie la somme
+  - SUM(): renvoie la somme\
+  Ces fonctions permettent de combiner plusieurs lignes en une seule valeur.
 ]
 
 #def("GROUP BY")[

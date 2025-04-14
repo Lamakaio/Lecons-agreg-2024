@@ -7,6 +7,7 @@
   prerequis: [Modèle relationnel, SQL])
 
 = Problème
+WARNING : HORS PROGRAMME\ on pourrait présenter ça à la fin d'une leçon pour donner une idée aux élèves qu'on peut faire ça\ \
 Un magasin possède une base de donnée pour garder en mémoire ses produits et les catégories auquels ils appartiennent. On veut maintenant rajouter des informations sur les impactes environnementaux de ces produits. Celà dans le but de pouvoir calculer quels produits ou quelles catégories ont le plus grand impact.
 
 Initialement on a le schéma relationnel suivant :\
