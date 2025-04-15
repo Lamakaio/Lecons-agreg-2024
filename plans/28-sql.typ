@@ -55,7 +55,7 @@ CREATE TABLE Commande (idProduit INTEGER,
                       date DATE,
                       FOREIGN KEY (idProduit) REFERENCES Produit(idProduit),
                       FOREIGN KEY (idClient) REFERENCES Client(idClient),
-                      PRIMARY KEY (idProduit, idClient) );
+                      PRIMARY KEY (idProduit, idClient, date) );
 
 ```
 ]
@@ -68,8 +68,6 @@ CREATE TABLE Commande (idProduit INTEGER,
 #def("Valeur NULL")[
   Un champ peut avoir un type _nullable_ qui permet d'avoir la valeur NULL qui représente l'absence de valeur.
 ]
-
-#dev[ On peut aussi modifier une base donnée après sa création. Exemple. ]
 
 = Inserer / Modifier / Supprimer des données ()
 
@@ -170,11 +168,16 @@ Le langage SQL fournis des opérateurs ensemblistes qui permettent de faire des 
   ```
 ]
 
+#blk2("Remarque")[
+  Il faut préciser de quelle table vient un attribut si un autre attibut au même nom est présent dans plusieurs tables de la requête.
+  Lorsqu'on fait une séléction sur plusieurs tables il est souvent pratique de renommer celles-ci pour plus de lisibilité. 
+]
+
 == Jointure
 Comme énoncer on peut faire des produit cartésien de plusieurs table pour les relier ensemble et en faire des requêtes. On va voir ici une méthode plus éfficace de faire cela grâce aux jointures.
 
 #def("Jointure")[
-  Pour relier 2 tables ensemble étant relié par un attribut (clé étrangère) on utilise une jointure. Si on a plusieurs 
+  La jointure permet de relier 2 tables en filtrant les entrées sur celles vérifiant une condition. Par exemple, pour relier 2 tables qui sont lié par un attribut (clé étrangère) : 
   - JOIN table2 ON clé-table1 = clé-table2 : jointure interne, nous n'avons que les entrées qui sont à la fois dans la table1 et la table2.
   - FULL JOIN : on a toutes les entrées avec des valeurs à NULL pour les entrée présent dans une seule table.
   - tbale1 LEFT JOIN table2 : on a toutes les entrées de table1 et les entrées de table2 seulement pour les entrée non NULL.
@@ -197,7 +200,8 @@ Comme énoncer on peut faire des produit cartésien de plusieurs table pour les 
 
 == Fonction d'agrégation
 #def("Fonctions d'agrégations")[
-  Certaines fonction existe en SQL qu'on peut appelé dans nos SELECT, sous la forme : \
+  Certaines fonctions existe    
+nt en SQL qu'on peut appelé dans nos SELECT, sous la forme : \
   SELECT f(attribut) FROM ... -- avec f la fonction dans :
   - COUNT(): renvoie le nombre de ligne de l'ensemble
   - MIN(): renvoie la plus petite valeur 
@@ -229,10 +233,13 @@ Comme énoncer on peut faire des produit cartésien de plusieurs table pour les 
 ]
 
 #blk2("Exercice")[
-  Quelle sont les produits qui ont été commandés dans chaque ville de la base de donnée?\
+  Quels sont les produits qui ont été commandés dans chaque ville de la base de donnée?\
   Quel est le produit le moins cher qui pèse plus d'un kg?\
   Quel produit est commandés en moyenne avec la plus grande quantité?
   Par ville, quelle est le nombre de produit commandé et la moyene de quantité commandé.
 ]
 
 #dev[Requêtes avancées avec ou sans agrégation]
+
+= Ouverture 
+#dev[ On peut aussi modifier une base donnée après sa création. Exemple. ]
