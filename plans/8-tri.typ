@@ -23,7 +23,9 @@
 ]
 
 #blk2("Motivation")[
-  Pourquoi trier ? Pour simplifier certaines opérations usuelles sur les listes (min, max, recherche)
+  Pourquoi trier ? 
+  - Pour simplifier certaines opérations usuelles sur les tableaux (min, max, recherche)
+  - On a une immense base de données (ex un marketplace qui vend des miliers de produits et on souhaite afficher par prix croissant ou décroissant...)
 ]
 
 #blk2("Activité")[
@@ -95,45 +97,7 @@
   Dans le pire cas $O(|E|²)$, dans le meilleur cas $O(|E|)$
 ]
 
-== Application : la recherche dichotomique
-//tortue 1er
 
-#blk3("Algorithme")[
-  Entrées : E liste trié, x entier \
-  Sortie : renvoie vrai si x est dans E 
-  #pseudocode-list(hooks: .5em, booktabs: true)[
-    *Recherche_dichotomique(E,x):*
-    + *Si* len(E) = 0 :
-      + *Renvoyer* Faux
-    + g = 0
-    + d = len(E)-1
-    + *Tant que* g<=d :
-      + m = (a+b)/2
-      + *Si* E[m] < x:
-        + a = m+1
-      + *Si* E[m] > x:
-        + a = m-1
-    + *Si* E[m] = x:
-      + *Renvoyer* Vrai
-    + *Renvoyer* Faux
-  ]
-]
-
-#blk2("Terminaison")[
-  Variant de boucle : "g-d".
-]
-
-#blk2("Correction")[
-  Invariant de boucle : "si x est dans E, alors son indice est enree g et d".
-]
-
-#blk2("Compléxité")[
-  $O(log(|E|))$
-]
-
-#blk2("TP")[
-  Implémentation et comparaison avec recherche linéaire.
-]
 
 = Tris utilisant la méthode diviser pour régner
 == Tri fusion
@@ -179,6 +143,10 @@
   $C(n) = 2C(n/2) + theta(n) => C(n)=O(n log(n))$
 ]
 
+#blk2("Remarque")[
+  On peut parralléliser le tri_fusion pour chaque sous-tableau sur lequel on appelle tri_fusion.
+]
+
 == Tri rapide
 
 #blk3("Algorithme")[
@@ -203,6 +171,31 @@
   ]
 ]
 
+== Application : la recherche dichotomique
+//tortue 1er
+
+#blk3("Algorithme")[
+  Expliquer l'idée de l'algorithme
+]
+
+#blk2("Terminaison")[
+  Variant de boucle : "g-d".
+]
+
+#blk2("Correction")[
+  Invariant de boucle : "si x est dans E, alors son indice est enree g et d".
+]
+
+#blk2("Compléxité")[
+  $O(log(|E|))$
+]
+
+#blk2("TP")[
+  Implémentation et comparaison avec recherche linéaire.
+]
+
+= Autres tris
+
 == Tri par tas
 
 #blk3("Principe")[
@@ -211,6 +204,23 @@
 ]
 
 #dev("Tri par tas")
+
+== Tri par comptage
+
+#blk1("Propriété", "Tri hors tri par comparaison")[
+  Il existe des tris qui ne font pas de comparaison de valeur.
+]
+
+#blk1("Algorithme", "Tri par comptage")[
+  Il faut vouloir trier un tableau qui est dans $NN⁺$.\
+  Initialiser un tableau _compteur_ de taille k avce 0 en valeur pour chaque case, avec k la borne supérieure des valeurs de notre tableau. Parcourir le tableau à trier, pour une valeur i, rajouter 1 à _compteur[i]_.
+  Apres le parcours on parcours le tableau comptage pour reconstruire le tableau trié.
+]
+
+#blk2("Compléxité")[
+  $O(k+n)$ en temps
+  mais on a besoin de $O(k)$ espace en plus.
+]
 
 = Applications
 == Algorithmes gloutons
@@ -248,3 +258,8 @@
 
 On veut sommer n flottants. À chaque sommen on peut avoir une erreur d'arrondi. Dans quel ordre faut-il sommer pour avoir une minimisation de cette erreur ?
 
+== Base de données
+
+- Trier des tables ORDER BY
+- La stabilité est importante si on veut ORDER BY sur plusieurs colonnes
+- on peut avoir des quantitées de données très grande ce qui rend le retour de la requête longue si le tri n'est pas efficace (utilisation d'indexes)

@@ -17,6 +17,7 @@
 = Circuits
 == Porte logique et circuits booléens
 #def[Porte logique][
+  _FAIRE DESSIN PORTES_\
   Une porte logique est un circuit élémentaire qui réalise une opération logique. Les portes usuelles sont les suivantes : 
   - la porte NON
   - la porte ET
@@ -34,15 +35,16 @@
 #blk2[Exemple][
   #image("../img/circuit.svg")
 ]
-#def[Valeur d'un circuit][
-  Si on se donne une valeur dans ${0, 1}$ pour chaque entrée du circuit, on étiquette chaque fil par 0 ou 1, tel que 
-  - si le noeud source du fil est une porte logique, sa valeur est le résultat de l'opération logique correspondante
-  - si le noeud source du fil est un point, alors sa valeur est la valeur de l'entrée de celui-ci. 
 
-  On donne ensuite une valeur à chaque sortie du circuit, qui est l'étiquette de son fil entrant. 
+// #def[Valeur d'un circuit][
+//   Si on se donne une valeur dans ${0, 1}$ pour chaque entrée du circuit, on étiquette chaque fil par 0 ou 1, tel que 
+//   - si le noeud source du fil est une porte logique, sa valeur est le résultat de l'opération logique correspondante
+//   - si le noeud source du fil est un point, alors sa valeur est la valeur de l'entrée de celui-ci. 
 
-  On appelle table de vérité d'un circuit le tableau donnant la valeur de ces sorties en fonction de la valeur de ses entrées.
-]
+//   On donne ensuite une valeur à chaque sortie du circuit, qui est l'étiquette de son fil entrant. 
+
+//   On appelle table de vérité d'un circuit le tableau donnant la valeur de ces sorties en fonction de la valeur de ses entrées.
+// ]
 
 
 == Un exemple de circuit réèl : l'additionneur

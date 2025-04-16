@@ -12,10 +12,11 @@
 \
 = Rappel + implémentation 
 
-Rappel sur la structure de tas-max :
+Définition de tas-max :
 - Arbre binaire complet à gauche
-- Racine plus grand que tout les éléments de ces sous-arbres
-- Sous-arbres sont des tas-max
+- Definition inductive :
+  - Cas de base : l'arbre vide est un tas, une feuille est un tas
+  - Cas inductif : un noeud contenant la valeur $v$ et contenant deux sous-arbres $g$ et $d$ est un tas si $g$ et $d$ sont des tas et si $v>=v_g "et" v>=v_d$
 
 #image("../img/tas_ex.png", width: 80%, )
 
@@ -95,6 +96,7 @@ Sortie : T un tas-max contenant les éléments de tab\
 
 _On va commencer par construire des tas à partir des feuilles et remonter petit à petit jusqu’à la racine en utilisant les tas déjà fabriqués et la fonction _Entasse_._
 
+_Peut etre ne pas écrire le code et juste faire l'exemple si on fait la correction de entasse_
 #pseudocode-list(hooks: .5em, booktabs: true)[
   *Construit (tab) :*
   + T.taille = len(tab)
@@ -116,6 +118,9 @@ On entasse pour chaque i,pris dans l’ordre décroissant, un arbre dont les deu
 
 
 == Complexité
+_dire que on peut calculer en $O(n)$ mais ne pas faire le calcul l'avoir sur papier si question_
+
+#text(fill: gray)[
 \
 La complexité de Construit est naïvement en $O(n log(n))$ car pour chaque élément on appelle Entasse, mais on peut calculer plus finement pour avoir une complexité linéaire.\
 
@@ -128,7 +133,7 @@ $sum_(p=0)^(h-1) 2^p (h-p) = sum_(k=1)^(h) 2^(h-k)k = 2^h sum_(k=1)^(h) (1/2)^k 
 (_car $sum_(k=1)^(+infinity) (1/2)^k k$ tend vers 2_)
 
 Ainsi la complexité de _Construit_ est en $O(n)$
-
+]
 = Écriture de Tri_tas(tab)
 
 == Algorithme 
@@ -150,7 +155,7 @@ Ainsi à la fin de l’algorithme les éléments seront triés par ordre croissa
     + Entasse(T,i)
   + *Retourner* T.tab
 ]
-
+#text(fill: gray)[
 == Correction
 #underline("Terminaison :") \
 _Entasse_ termine et on prend comme variant i. \
@@ -162,3 +167,4 @@ En effet, à l’étape i on place l’élément maximal du tas en position L−
 Ainsi, à l’étape L, le tableau contient tous les éléments rangés dans l’ordre croissant, donc l’algorithme du tri par tas est correct.\
 
 La complexité du tri par tas est en $O(n)+n×O(log n) = O(n log n)$.
+]

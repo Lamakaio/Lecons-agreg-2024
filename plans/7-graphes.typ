@@ -16,7 +16,6 @@
   motivations: [Réseaux, Automates, Jeux])
 
 
-#text(fill:red)[RAJOUTER APPLICATIONS COMME AUTOMATES OU AUTRES JSP QUOI]\
 #text(fill:red)[PARLER DES IMPLÉMENTATIONS MATRICE OU LISTE D'ADJACENCE CAR CA CHANGE LES COMPLÉXITÉS]
 
 
@@ -63,12 +62,8 @@
     + *parcours_profondeur(G, vus, s)* :
       + *si* s n'est pas dans vus :
         + ajouter s à u
-        + *pour* v dans les voisins de s :
+        + *pour* v $in$ V[s] :
           + parcours_profondeur(G, vus, v)
-    + *parcours_profondeur(G, s)* : 
-      + vus = []
-      + parcours_profondeur(G, vus, s)
-
   ]
 ]
 
@@ -94,7 +89,7 @@
       + f file initilisé avec s 
       + *tant que* f n'est pas vide : 
         + x = defiler f 
-        + *pour* v dans les voisins de x:
+        + *pour* v $in$ V[x]:
           + si v n'est pas dans vus :
             + f enfiler v 
             + ajouter v dans vus 
@@ -161,6 +156,11 @@
   Rédiger la preuve que l'ordre postfixe d'un parcours en largeur est un tri topologique.
 ]
 
+== Application sur les automates
+Un automate peut etre représenté par un (multi-)graphe orienté pondéré par des lettres de l'alphabet.
+#blk2("Langage vide")[
+  Vérifier si un le langage d'un automate est vide revient à vérifier si aucun de ces états finaux est accéssible.
+]
 
 
 = Plus court chemins

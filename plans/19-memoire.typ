@@ -11,10 +11,16 @@
 #show: codly-init.with()
 #show: lecon.with(
   titre: [Leçon 19 : Mémoire : du bit à l'abstraction vue par les processus], 
-  niveau: [L3], 
+  niveau: [1ere / MP2I / L3], 
   prerequis: [Circuit combinatoires])
 
-= Mémoire physique en architecture des ordinateurs
+= Introduction 
+On modélise un ordinateur par la machine de Von Neumann.
+Dans cette leçon on se concentre sur la partie Mémoire.
+
+FAIRE DESSIN
+
+= Du bit à la RAM (L3 ?)
 
 == Circuits séquentiels
 À l'aide de portes logique nous avons pu voir comment construre des circuits combinatoires. 
@@ -28,7 +34,7 @@ Les circuits séquentiels forment une généralisations des circuits combinatoir
   FAIRE SCHEMA
 ]
 
-== Horloge
+// == Horloge
 
 #def("Horloge")[
   Une horloge est un signal libre ayant une période (et donc une fréquence) fixée. Une période d'horloge est appelée cycle d'horloge
@@ -36,16 +42,16 @@ Les circuits séquentiels forment une généralisations des circuits combinatoir
   L'état d'un élément est mis à jour sur un front montant.
 ]
 
-#def("Synchrone")[
-  Lorsqu'un système contient une seule horloge on dit qu'il est synchrone. Sinon il est asynchrone.
-]
+// #def("Synchrone")[
+//   Lorsqu'un système contient une seule horloge on dit qu'il est synchrone. Sinon il est asynchrone.
+// ]
 
-#def("État stable")[
-  Un circuit séquentiel est dans un état stable lorsque tous ses éléments à états sont stables, c'est à dire qu'il n'y a aucune autre information que celle du front montant qui pourrait la mettre à jour.
-]
-#blk2("Remarque")[
-  Il est fortement souhaitable que notre circuit soit dans un état stable avant d'enclencher un nouveau front montant d'horloge.
-]
+// #def("État stable")[
+//   Un circuit séquentiel est dans un état stable lorsque tous ses éléments à états sont stables, c'est à dire qu'il n'y a aucune autre information que celle du front montant qui pourrait la mettre à jour.
+// ]
+// #blk2("Remarque")[
+//   Il est fortement souhaitable que notre circuit soit dans un état stable avant d'enclencher un nouveau front montant d'horloge.
+// ]
 
 == Éléments de mémoire : verrous, registres et RAM 
 
@@ -71,11 +77,44 @@ Les circuits séquentiels forment une généralisations des circuits combinatoir
 ]
 
 #def("Mémoire adressable (RAM)")[
+  La RAM est la mémoire vive, qui perd ses données lorsque l'ordinateur s'éteint à l'inverse la mémoire de stockage ne perd aps son contenu.\
   Une mémoire adressable est composée de plusieurs registres juxtaposés. Chaque registre possède une adresse, grâce à laquelle on peut séléctionner quel registres on souhaite accèder ou écrire.
   #image("../img/RAM.png", width: 40%)
 ]
 
-= Hiérarchie mémoire
+= Encodage des données (1ere/MP2I)
+
+== Les entiers
+
+#def[Base][
+  Une représentation en base $b >= 2$ d'un entier $N in NN$ est une suite a_i telle que $N = Sigma_(i=0)^(k-1) a_i b^i$ avec $0<=a_i<b$. En base 2 on appelle $a_0$ le bit de poids faible et $a_(k-1)$ le bit de poids fort.
+]
+
+#ex[
+  FAIRE EXEMPLE DE BASE 10 à BASE 2 ou 16
+]
+
+#def("Complément à 2")[
+  
+]
+
+== Les réels
+#def("IEEE 754")[
+  $(-1)^s m times 2^(n-d)$\
+  [signe][exposant][mantisse]\
+  [1 bit ][ 8 bits ] [23 bits]
+]
+
+== Le texte 
+#def("Codage ASCII")[
+  On encode les caractères de par la table ASCII sur 8 bits
+]
+
+#def("Codage UNICODE")[
+  UTF-8 sur 4 octets
+]
+
+= Hiérarchie mémoire (MP2I)
 
 #blk1("Propriété", "Hierarchie mémoire")[
   La mémoire est organisé hierarchiquement. En effet on a plusieurs niveaux de mémoire, les plus proche du processeur sont les plus rapides mais aussi les plus petites en taille. Les mémoires les plus rapides sont souvent celle qui coûte le plus cher à construire, c'est pour celà en partie qu'elles sont bien plus petites.
