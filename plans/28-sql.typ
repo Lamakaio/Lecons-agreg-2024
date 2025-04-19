@@ -15,7 +15,7 @@ On fait le lien avec la leçon précédente, modèle relationnel et conception d
 Maintenant qu'on a notre schéma relationnel on le traduit en table SQL. Dans un premier temps on va donc construire nos table, puis apprendre à inserer/modifier/supprimer des données à l'intérieur de celles-ci pour enfin pouvoir faire des requêtes d'accès aux données dont on a besoin.
 
 #def("Langage SQL")[
- Structured Query Language (SQL): langage qui permet de construire une base de donnée et de stocker, et accéder efficacement aux données contenue. 
+ Structured Query Language (SQL): langage déclaratif qui permet de construire une base de donnée et de stocker, et accéder efficacement aux données contenue. 
 ]
 
 #def("SGBD")[
@@ -91,9 +91,8 @@ Une fois les tables créées on peut ajouter des données à l'intérieur, on pe
   ```
 ]
 
-= Accès aux données
 
-== Requête de sélection basique
+= Requête de sélection basique
 #def("Selection")[
   Une requête de séléction prend en entrée une ou plusieurs tables et renvoie une nouvelle table. Cette table est temporaire, elle n'est pas stocké dans la base de donnée.
 ]
@@ -140,6 +139,8 @@ Une fois les tables créées on peut ajouter des données à l'intérieur, on pe
   SELECT * FROM Produit WHERE idProduit NOT IN (SELECT idProduit FROM Commande); 
   ```
 ]
+
+= Requête avancées
 
 == Opérations ensemblistes
 #def("opérateurs ensemblistes")[
@@ -241,5 +242,7 @@ nt en SQL qu'on peut appelé dans nos SELECT, sous la forme : \
 
 #dev[Requêtes avancées avec ou sans agrégation]
 
-= Ouverture 
-#dev[ On peut aussi modifier une base donnée après sa création. Exemple. ]
+== Modification d'une base de donnée
+Une base de donnée n'est pas figé dans le temps et est amené à changer au fil du temps. La conception continue après la création
+
+#dev[ Exemple de modification d'une base de donnée]
