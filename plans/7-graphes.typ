@@ -175,33 +175,33 @@ Dans un premier temps on cherche tous les plus courts chemins, avec leurs poids,
 === Bellman-Ford
 
 #blk3("Principe de l'algorithme")[
-  Cet algorithme utilise le principe de programmation dynamique. On a les formules : \
-  - $d[t,k]$ : est la distance du sommet s à t avec un chemin qui contient au plus k arcs
-  - $d[s,0]=0$
-  - $d[t,0]= + infinity$ pour $t≠s$ et $$
-  - $d[t,k]=$min ${ d[t,k−1], min_(u->t)(d[u,k−1]+w(u,t))}$ \ 
-    où $w(u,t)$ est le poids de l'arrête $u->t$
+  Cet algorithme utilise le principe de programmation dynamique. 
+  1. On décompose le problème en sous-problème $D^k (t)$ qui est la distance du sommet $s$ à $t$ avec un chemin qui contient au plus k arcs.
+  2. On a la relation de récurrence :
+  - $D^k (s)=0$
+  - $D^0 (t)= + infinity$ pour $t≠s$ 
+  - $D^k (t)=$min ${ D^(k-1) (t), min_(u-t)(D^(k-1)(u)+w(u,t))}$
 ]
 #blk3("Algorithme")[
   #pseudocode-list(hooks: .5em, booktabs: true)[
     *BELLMANN-FORD ( G, s ) :*
-    + distance $<-$ Tableau de taille $|S|$ initialisé à $+infinity$
-    + distance[s] $<-$ 0
+    + d $<-$ Tableau de taille $|S|$ initialisé à $+infinity$
+    + d[s] $<-$ 0
     + modifie = vrai
     + *Tant que* modifie :
       + modifie = faux
       + *Pour* u dans S :
-        + *Pour* v dans les voisins de u :
-          + dv = distance[v] + poids de l'arc u$->$v
-          + *Si* dv < distance[u] :
-              + distance[u] = dv
+        + *Pour* v $in$ V[u] :
+          + dv = d[v] + w(u,v)
+          + *Si* dv < d[u] :
+              + d[u] = dv
               + modifie = vrai
-    + *Retourner* distance
+    + *Retourner* d
   ]
 ]
 
 #blk2("Compléxité")[
-  $O(|S|dot|A|)$ 
+  $O(|S|^3)$ si implémentation par matrice (on parcours la matrice |S| fois en $O(|S|^2)$) 
 ]
 
 #blk2("Remarque")[
