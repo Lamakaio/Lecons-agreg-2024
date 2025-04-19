@@ -263,10 +263,10 @@ On cherche maintenant un algorithme plus efficace pour avoir accès à tous les 
 === Floyd-Warshall
 
 #blk3("Principe de l'algorithme")[
-  L'algorithme de Floyd-Warshall utilise la programmation dynamique, on a les formules : 
-  - $W^k_(i j)$ : est le poids minimal d'un chemin du sommet i au sommet j n'empruntant que des sommets intermédiaires dans {1, 2, 3, …, k} s'il en existe un, et ∞ sinon
-  - $W^0$ est la matrice d'adjacence
-  - $W^k_(i j) = min(W^(k-1)_(i j),W^(k-1)_(i k) + ,W^(k-1)_(k j))$
+ 1. On considère le sous problème $D^k (i, j)$ qui est le poids minimal d'un chemin du sommet i au sommet j n'empruntant que des sommets intermédiaires dans {1, 2, 3, …, k} s'il en existe un, et $infinity$ sinon.
+ 2. On a la relation de récurrence :
+  - $D^0$ est la matrice d'adjacence
+  - $D^k (i,j) = min(D^(k-1) (i,j),D^(k-1) (i,k) + D^(k-1) (k,j))$
 ]
 
 // #blk1("Algorithme", "Floyd-Warshall")[
