@@ -62,6 +62,7 @@ _Écrire le code en même temps que faire sur l'exemple d'abord init puis event_
 = Preuve de terminaison, correction et complexité (de la version décentralisé)
 
 Invariant de boucle : \
+$D^i (t)$ : est la distance du sommet $s$ à $t$ avec un chemin qui contient au plus k arcs
 $P(i) : quote D^i (t) "est le plus court chemin (pcc) de" s" à" t "avec au plus" i "sauts." quote$
 
 *Démonstration :*\
