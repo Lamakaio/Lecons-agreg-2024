@@ -39,6 +39,7 @@ Si p est une sous pyramide de $Pi$, on note $S(p)$ la valeur max d’un chemin d
 On note $Pi_g$ et $Pi_d$ les sous-pyramides gauche et droite de $Pi$\
 $S(Pi) = v(Pi) + max(S(Pi_g ), S(Pi_d)) $\
 où $v(Pi)$ est la valeur du sommet de la pyramide.
+$S(Pi) = v(Pi)$ si $Pi$ n'a qu'un élément
 
 = Implémentations
 
@@ -72,6 +73,10 @@ _laisser un peu de place pour rajouter le code en rouge_
 
 La complexité de la version sans mémoïsation est $C(h) = 1 + 2C(h-1)$ donc $O(2^h)$ 
 
+_Fire dessin triangle explicatif de se qu'on recalcul_
+
+Avec mémoïsation :
+
 On initialise une matrice globale $R$ de dimension $h*h$ initialisé à -$infinity$
 
 La complexité de la version sans mémoïsation est $O(h^2) $ car on ne remplie la tableau R qu'une fois.
@@ -79,11 +84,11 @@ La complexité de la version sans mémoïsation est $O(h^2) $ car on ne remplie 
 == Méthode déscendante
 #pseudocode-list(hooks: .5em, booktabs: true)[
   *cheminOpt (T) :*
-  + R = matrice de (|T|+1)^2 
+  + R = matrice de (|T|+1)^2 init à 0
   + *Pour* i de |T|-1 à 0 :
     + *Pour* j de 0 à i :
       + R[i][j] = T[i][j] + max (R[i+1][j], R[i+1][j+1])
-  *Retourner* R[0][0]
+  + *Retourner* R[0][0]
 ]
 
 *Exemple*

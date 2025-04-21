@@ -159,7 +159,14 @@ premier fil qui libère tout le monde :
 for(int i=0; i<n−1; i++) incrementer(&s);
 ``` 
 
+_peut être ajouter la libération en arborescence si temps restant_
 
-(peut être ajouter la libération en arborescence si temps restant)
+= Application 
+Minimum d'un tableau de n éléments avec k fils d'éxecutions.\
 
-(rajouter exemple/application)
+#table(columns: 9, " ", "O", " ","O"," "," "," "," ","O",)
+On découpe en sous tableau de $n/k$. Qui font la phase 1 qui consiste à calculer le minimaux de leur sous-tableau.
+On attend que les k threads aient trouvé leurs éléments minimaux, puis on peut lancer la phase 2, qui fait le minimaux de ces k éléments.
+
+$O(n/k + k)$ optimal pour $k = sqrt(n) => O(sqrt(n))$
+
