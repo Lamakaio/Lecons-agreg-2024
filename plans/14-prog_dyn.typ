@@ -43,7 +43,7 @@ On fait le lien avec la leçon diviser pour régner, en effet il y a certains pr
 #blk1("Algorithme", "Fibonacci avec stockage")[
   #pseudocode-list(hooks: .5em, booktabs: true)[
       *Fibo(n) :*
-      F = [0,1]
+      + F = [0,1]
       + *Pour* i de 2 à n :
         + F[i] = F[i-1]+F[i-2]
       + *Retourner* F[n]
