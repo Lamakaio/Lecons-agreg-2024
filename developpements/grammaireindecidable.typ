@@ -7,7 +7,7 @@
   niveau: [MPI], 
   prerequis: [Indécidabilité])
 
-#rect[sources : le ellipse je crois ? le deuxième screen que m'a envoyé Félix en tout cas]
+#rect[Source : Langages formals / Calculabilité et compléxité ]
 #text(fill: red)[à tester, mais faut probablement rajouter un truc à ce développement]
 
 On admet dans ce developpement que le problème de correspondance de POST est indécidable. 
