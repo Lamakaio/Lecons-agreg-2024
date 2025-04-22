@@ -44,7 +44,7 @@ Objectif : trouver les plus courts chemins d'une source $s$ vers les sommets de 
 = Preuve de terminaison, correction et complexité 
 
 Invariant de boucle : \
-$P(i) : quote D^i (t) "est le plus court chemin (pcc) de" s" à" t "avec au plus" i "sauts." quote$
+$P(i) : quote D^i (t) "est la distance d'un plus court chemin (pcc) de" s" à" t "avec au plus" i "sauts." quote$
 
 *Démonstration :*\
 - $P(0)$ est vrai car le seul endroit où on peut aller en 0 sauts, c’est sur soi-même, qui est à distance 0

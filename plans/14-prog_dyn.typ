@@ -53,7 +53,7 @@ On fait le lien avec la leçon diviser pour régner, en effet il y a certains pr
 == Définitions
 
 #def("Programmation dynamique")[
-  La programmation dynamique est une technique pour améliorer l'éfficacité d'un algorithme en évitant les calculs redondants. \
+  La programmation dynamique est une méthde pour améliorer l'éfficacité d'un algorithme en évitant les calculs redondants. \
   Pricipe : décomposer le problème en sous-problèmes, de résoudre chacun des sous-problèmes en stockant les résultats intermédiaires pour construire la solution.\
 ]
 
@@ -62,7 +62,7 @@ On fait le lien avec la leçon diviser pour régner, en effet il y a certains pr
 2. Trouver une relation entre les sous-problèmes
 3. Résoudre les sous-problèmes en utilisant la relation :
   - soit impérativement, du plus petit au plus grand en remplissant un tableau des sous-problèmes (méthode ascendante)
-  - soit récursivement, en utilisant la mémoïsation (méthode ascendante)
+  - soit récursivement, en utilisant la mémoïsation (méthode descendante)
 ]
 
 #blk2("Remarque")[
@@ -162,6 +162,7 @@ On fait le lien avec la leçon diviser pour régner, en effet il y a certains pr
 ]
 
 #blk3("Algorithme")[
+#pseudocode-list(hooks: .5em, booktabs: true)[
   *aligne(s1, s2):*
   + *Pour* i de 0 à |s1| :
     + s[i][0] = -i
@@ -175,6 +176,7 @@ On fait le lien avec la leçon diviser pour régner, en effet il y a certains pr
       + *sinon* :
         + s[i][j] = max (s, -1 + s[i-1][j-1])
   + *Retourner* s[|s1|][|s2|]
+]
 ]
 #ex[
   #image("../img/progdyn2.png", width: 50%)
@@ -204,6 +206,6 @@ L'algorithme de Bellman-Ford utilise la programmation dynamique pour calculer to
 ]
 
 #blk2("Compléxité")[
-  $O(V³)$
+  $O(S³)$
 ]
 
