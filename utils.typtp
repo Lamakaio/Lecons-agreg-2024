@@ -79,3 +79,7 @@
   }
   table(columns: vars.len() + formulas.len(), ..t)
 }
+
+#let r(body) = {
+  text(fill:red)[#body]
+}
