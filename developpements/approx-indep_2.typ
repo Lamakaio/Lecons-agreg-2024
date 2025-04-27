@@ -108,6 +108,9 @@ DESSIN
   - $forall j > 4 :$\
     Alors $1/3 T^* >= d_j$, car on aurait $P_1$ ou $P_2$ qui aurait au moins 3 tâches et que les tâches sont triées dans l'ordre décroissant donc suppérieur à $d_j$.\
     Donc $T <= T^* + 1/6 T^* <=> T <= 7/6 T^*$
+]
 
 
+#text(fill: red)[
+  Si question sur la NP complétude de indep 2 regarder preuve par réduction SUBSETSUM dans bouquin de Bob. Ex 7.20.
 ]
