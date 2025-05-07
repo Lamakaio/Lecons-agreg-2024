@@ -24,6 +24,10 @@ Quand on écrit un programme, on aimerait savoir si il est correct.
   - Quand il termine, il renvoie l'entrée attendue (correction partielle)
 ]
 
+#blk2("Remarque")[
+  On remarque l'importance d'avoir des bonnes spécifications pour savoir quoi tester sur l'algorithme.
+]
+
 Malheureusement, il est impossible pour le compilateur de déterminer si un programme est correct : c'est un problème indécidable. 
 #dev[Indécidabilité de la correction, théorème de Rice]
 
@@ -31,6 +35,10 @@ Malheureusement, il est impossible pour le compilateur de déterminer si un prog
 Plutôt que de s'assurer, à coup sûr, que notre programme est correct, on va donc écrire des test, qui executent notre programme sur des entrées bien choisies. Cela permetra de trouver les erreurs dans le code. 
 ]
 
+#blk2("Définition")[
+  Il existe plusieurs famille de test, dans cette leçon on va se concentrer sur les test unitaires.
+  #image("../img/test_1.png", width: 30%)
+]
 
 == Données de test
 
@@ -195,6 +203,10 @@ On essaye alors de créer un jeu de test qui emprunte (ou couvre) tout le graphe
   - La couverture des chemins : Tous les chemins possibles entre le début et la fin du programme doivent être empruntés. (On n'emprunte les cycles qu'un nombre limité de fois)
 ]
 
+#blk2("Outil")[
+  En pratique, il existe des extension d'IDE qui permettent de voir la couverture du code et quels lignes ne sont pas testé.
+]
+
 #ex[
   Dans l'exemple 21, le jeu de test ${((1, 1), 1), ((1, 3), 1)}$ couvre tous les sommets mais pas toutes les arrêtes. 
 ]
@@ -206,9 +218,50 @@ On essaye alors de créer un jeu de test qui emprunte (ou couvre) tout le graphe
 
 On peut exiger que chacune de ces conditions soit couverte par le jeu de test. Cela reviens à dupliquer les arrêtes pour n'avoir que des conditions élémentaires.]
 
-= Outils et pratiques pour tester les programmes
+= Outils pour l'inspection de code
 
-Voici une liste d'outils permettant de trouver des erreurs plus facilement 
-- Compiler avec `-Wall`, ce qui active tous les avertissements. Chaque avertissement doit être étudié et corrigé si nécéssaire.
-- Programmation défensive, en testant explicitement les invariants du programme pendant son execution (instruction `assert`)
-- `valgrind` est un programme qui permet de vérifier les accès et allocations mémoire pour un programme C. Pour un executabl"e `a.out`, on l'utilise avec `valgrind a.out`. Tout ce qui est indiqué par valgrind est une erreur qui doit être corrigée.
+#blk1("Pricipe", "Qualité du code")[
+  Un code clair, avec des noms de variables explicites, et des commentaires, sera plus facile à traiter et à débugguer.
+]
+
+#blk1("Pricipe", "Programmation défensive")[
+  Quand on a des invariants ou pré-conditions, on peut tester directement pendant l'exécution à l'aide de la directive `assert [condition]` (Ocaml et Python)
+]
+
+#blk1("Outil", "Compilateur")[
+  Le compilateur, peut pouvoir détecter des erreurs. Ce sont des erreurs syntaxiques, on peut définir une grammaire du langage et analyser le code vient un algorithme d'analyse syntaxique.
+]
+
+#dev[Analyse syntaxique]
+
+#blk2("Remarque")[
+  La pluspart des IDE souligne en rouge les erreurs de compilations/syntaxique, les variables non utilisées...
+]
+
+#blk2("Remarque")[
+  En C, compiler avec `-Wall`, ce qui active tous les avertissements. Chaque avertissement doit être étudié et corrigé si nécéssaire.
+]
+
+#blk1("Outil", "Débuggueur")[
+  Les débuggueurs (comme gdb, ou directement dans les IDE) permettent l'exécution pas à pas d'un programme, et l'inspection de la mémoire.
+]
+
+#blk1("Outil", "Fuite de mémoire")[
+  `valgrind` est un programme qui permet de vérifier les accès et allocations mémoire pour un programme C. Pour un executabl"e `a.out`, on l'utilise avec `valgrind a.out`. Tout ce qui est indiqué par valgrind est une erreur qui doit être corrigée.
+]
+
+#blk1("Méthode", "Inspection de code d'un pair")[
+  En général sur des projets à plusieurs personne on fait relire son code par un pair pour qu'il vérifie que celui ci est correct et fait ce qui est demandé. Guthub, gitlab et autres gestionnaire de git permettent des Pull-Request qui demande l'aprobation d'un pair pour valider le code.
+]
+
+#blk1("Méthode", "Pair programming")[
+  On appelle pair programming le fait de coder à plusieurs sur un même ordinateur. Celà permet d'avoir deux personnes concentrer sur un code et réduit les erreurs. C'est souvent utiliser pour former des personnes ou sur des programmes compliqués.
+]
+
+#blk1("Méthode", "TDD")[
+  Test Driven developpement, est une méthode qui consiste à développer les tests avant de faire le contenu du programme. L'objectif est de passer tous les tests.
+]
+
+#blk2("TP")[
+  TP pour finaliser la leçon, on donne aux élèves une spécifications clairs et on leur demande de coder des tests qui couvrirait toutes les spécifications. Ensuite ils échangent leurs tests avec un autre binôme et doivent faire un code qui valide tout les tests. Si possible faire un code qui possède des erreurs pour montrer que les tests ne couvrent pas tout les cas.
+]
