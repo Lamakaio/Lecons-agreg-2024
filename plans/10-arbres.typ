@@ -75,14 +75,14 @@
 ]
 
 
-= Représentations
-== Représentation avec des pointeurs
+= Implémentation
+== Implémentation avec des pointeurs
 #blk2("Propriété")[
   À chaque noeud on associe une valeur et une liste de pointeur qui pointent vers les sous-arbres du noeud. L'arbre vide est représenté par le pointeur NULL.
 ]
 
 #ex[
-  Représentation d'un arbre binaire avec des pointeurs.
+  Implémentation d'un arbre binaire avec des pointeurs.
   #image("../img/arbre_2.png", width: 60%)
 ]
 
@@ -96,7 +96,7 @@
 ]
 
 
-== Représentation d'un arbre binaire complet dans un tableau
+== Implémentation d'un arbre binaire complet dans un tableau
 
 #def("Arbre binaire complet")[
   Un arbre binaire est dit complet si tous les niveaux à l'exception du dernier sont complètement remplis de noeud et que le dernier niveau est rempli à partir de la gauche.
@@ -136,8 +136,23 @@
 
 #blk3("Propriétés")[
   Pour un ABR de hauteur h, on peut insérer, supprimer et rechercher en $O(h)$.
-  Il est possible de rajouter des contraintes supplémentaire qui peut fixer h = $O(log(n))$ (ex: arbe rouge-noir)
 ]
+
+#blk2("Remarque")[
+  Si l'arbre est un peigne, on a $h=n$ donc on a les opérations insertion, suppressions, recherche en $O(n)$. On peut améliorer cela.
+]
+
+#def("Arbre rouge-noir")[
+  ABR ou chaque noeud porte une couleur (noir ou rouge) et vérifie les propriété :
+  1. le père d'un noeud rouge n'est jamais rouge
+  2. le nombre de noeuds noirs le long d'un chemin de la racine à une feuille est toujours le même.
+]
+
+#blk1("Propriété", "Hauteur ARN")[
+  Les arbre RN forment un ensemble d'abres équilibrés. La hauteur et donc les opérations se font en $O(log n)$
+]
+
+#dev[Insertion dans un arbre Rouge-Noir et preuve des propriétés]
 
 #ex[
   #image("../img/arbre_5.svg", width: 30%)
@@ -149,7 +164,7 @@
   On effectue un pré-traitement des points de notre plan qui construit cette arbre et nous permet de rechercher les plus proches voisins en moyenne en $O(log(n))$
 ]
 
-#dev[Recherche des k plus proche voisins grâce aux arbres k-dimensionnel]
+// #dev[Recherche des k plus proche voisins grâce aux arbres k-dimensionnel]
 
 == Tas 
 #def("Tas")[
