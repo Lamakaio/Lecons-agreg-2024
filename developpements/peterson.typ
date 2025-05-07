@@ -62,11 +62,11 @@ Idée : Pour éviter les conflits de lecture / écriture, on met deux variables 
 bool entree[2] = {false, false}; 
 
 void entree_section(int process) {
-  int other = 1 - process; 
+  int autre = 1 - process; 
 
   entree[process] = true;
 
-  while (entree[other]);
+  while (entree[autre]);
 }
 
 void sortie_section(int process) {
@@ -82,14 +82,14 @@ Problèmes :
 Idée : Les thread passent chacun leur tour. Comme ça, on évite les famines ! 
 
 ```C
-int turn = 0; 
+int tour = 0; 
 
 void entree_section(int process) {
-  while (turn != process);
+  while (tour != process);
 }
 
 void sortie_section(int process) {
-  turn = 1 - process; 
+  tour = 1 - process; 
 }
 ```
 
@@ -101,15 +101,15 @@ Problème : Si un seul thread accède à la section critique, il va rester bloqu
 #block(breakable: false)[
 #underline[Algorithme de Peterson]
 ```C
-int turn = 0;
+int tour = 0;
 bool entree[2] = {false, false} 
 
 void entree_section(int process) {
-  int other = 1 - process; 
+  int autre = 1 - process; 
   entree[process] = true; 
-  turn = other; 
+  tour = autre; 
 
-  while (entree[other] && turn == other);
+  while (entree[autre] && tour == autre);
 }
 
 void sortie_section(int process) {
@@ -117,17 +117,22 @@ void sortie_section(int process) {
 }
 ```
 ]
+\
+Explication rapide des propriétés : \ \
+#underline[_Exclusion mutuelle :_ ]\
+  Supposons que P0 soit dans la section critique lorsque P1 y accède. Donc `entree[0]==true` et `entree[1]==true`.\
+  Si P1 accède à la section critique c'est que `tour==1`, on cherche le test qui a permi à P0 d'accéder à la SC :
+    - ca ne peut pas être `entree[1]==faux` car P1 à executé `entree[1]=vrai` et `tour=0` donc il ne peut rentrer en SC
+    - ca ne peut pas être `tour==1` car P1 à modifié tour, donc `tour==0` lorsque P1 veut accéder à la SC, ce qui lui est interdit. 
+ Absurde. P1 ne peut accéder à la SC si P0 y accède.
 
-Explication rapide des propriétés : 
-- Exclusion mutuelle : Si les deux étaient dans la section critique, on aurait
-  - `entree[0]==true` et `entree[1]==true`
-  - Les deux "while" dépassés, donc `turn==0` et `turn==1`
-  Absurde !
+#underline[_Interblocage_] \
+  Si l’on suppose que P0 et P1 sont dans l’incapacité de terminer leur protocole d’entrée dans la section critique, alors on aurait simultanément (entree[1]==Vrai et tour=1) et (entree[0]=Vrai et tour=0), ce qui est impossible au regard des valeu  rs de tour.
 
-- Absence de famine : Supposons qu'un processus reste bloqué (le 0 par exemple), on a alors, à chaque test : 
+#underline[_Absence de famine :_]\ Supposons qu'un processus reste bloqué (le P0 par exemple), on a alors, à chaque test : 
   - `entree[1]==true` 
-  - `turn==1`
-  Or, comme le processus 1 ne reste pas dans la section critique, ça veut dire qu'il ré-appelle `entree_section`, et donc qu'il place `turn` à `0` définitivement. Absurde ! 
+  - `tour==1`
+Or, comme P1 ne reste pas dans la section critique, ça veut dire qu'il ré-appelle `entree_section`, et donc qu'il place `tour` à P0 définitivement. Absurde ! 
 
 
 
