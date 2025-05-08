@@ -130,3 +130,49 @@
   Si notre tableau est trop plein (on a trop de colision) il faut l'augmenter et pour cela changer la valeur de m, et recopier toutes les valeurs dans ce nouveau tableau.
 ]
 
+#blk2("Compléxité")[
+  Les complexités des opérations d'insertion, suppression et recherche dépendent donc du nombre de colision, et donc de la fonction de hashage. \
+  Si on à 100% de colision on se retrouve à chercher dans une liste donc en $O(n)$.\
+  En moyenne la complexité de ces opérations est en $O(1 + alpha)$ avec $alpha=n/m$ sous l'hypothèse d'un hashage uniforme. Si $m>n$ alors les opérations sont en moyenne en $O(1)$.
+]
+
+#blk2("Récapitulatif")[
+  #table( columns: 4,
+    "Structure","Insertion", "Suppression", "Recherche",
+    [Liste], [$O(n)$],[$O(n)$],[$O(n)$],
+    [Liste triée], [$O(n)$],[$O(n)$],[$O(log n)$],
+    [ABR], [$O(n)$],[$O(n)$],[$O(n)$],
+    [ARN], [$O(log n)$],[$O(log n)$],[$O(log n)$],
+    [Table de \ hashage], [$O(n)$ \ $O(1)$ moy],[$O(n)$ \ $O(1)$ moy],[$O(n)$ \ $O(1)$ moy],
+
+  )
+]
+
+= Applications
+
+== Sur les listes et tableaux
+
+#blk2("Exercice")[
+  Retirer les doublons d'une liste grace à un ensemble.
+]
+
+#ex[
+  On peut utiliser un dictionnaire pour étendre le tri par comptage à des tableaux avec des valeurs non bornées.
+]
+
+#dev[Tri comptage amélioré]
+
+== Mémoïsation
+#ex[
+  Les dictionnaires peuvent permettre l'implémentation de cache, donc de mémoïsation pour la programmation dynamique. => mettre exemple
+]
+== Graphe
+#ex[
+  On peut représenter un graphe par une liste d'adjacence, ou chaque sommet possède un dictionnaire avec comme clés les sommets de ses voisins et en valeurs le poids de l'arc si le graph est pondéré.
+]
+== Analyse du texte
+#ex[
+  Comptage occurences mot ou lettre grâce à un dictionnaire. Peut être utile pour Huffman.
+]
+
+
