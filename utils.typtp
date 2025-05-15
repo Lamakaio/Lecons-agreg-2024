@@ -33,6 +33,7 @@
 )]
 
 #let ex(body) = blk2("Exemple", body)
+#let rq(body) = blk2("Remarque", body)
 
 #let blk3(type, body) = box()[
     #underline()[ _#type #n()_\ ]
