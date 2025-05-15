@@ -10,7 +10,7 @@
   prerequis: [Graphes])
 
 = Présentation et Motivations
-Soit G = (S, A, w) un graphe pondéré non orienté. S sommets, A arcs et w(u,v) le poids de l'arc de $u - v$, +$infinity$ si aucun arc.
+Soit G = (S, A, w) un graphe pondéré non orienté. S sommets, A arcs et w(u,v) le poids de l'arc de $u - v$, +$infinity$ si aucun arc. On considère les poids positifs seulement.
 Objectif : trouver les plus courts chemins d'une source $s$ vers les sommets de S en utilisant la programmation dynamique.
 
 1. On décompose le problème en sous-problème $D^k (t)$ qui est la distance du sommet $s$ à $t$ avec un chemin qui contient au plus k arcs.
@@ -28,18 +28,18 @@ Objectif : trouver les plus courts chemins d'une source $s$ vers les sommets de 
     + modifie = vrai
     + *Tant que* modifie :
       + modifie = faux
-      + *Pour* u dans S :
-        + *Pour* v $in$ V[u] :
-          + dv = d[v] + w(u,v)
-          + *Si* dv < d[u] :
-              + d[u] = dv
+      + d' $<-$ d
+      + *Pour* chaque arc(u,v) :
+          + duv = d[v] + w(u,v)
+          + *Si* duv < d[u] :
+              + d[u] = duv
               + modifie = vrai
+      + d $<-$ d'
     + *Retourner* d
   ]
 
 = Exemple 
-
-
+3-cycle + 1
 
 = Preuve de terminaison, correction et complexité 
 
@@ -60,6 +60,11 @@ Ainsi, par principe de récurrence, $forall i in NN, P(i)$
 *Compléxité et Terminaison:* \
 De plus, un pcc ne passe pas deux fois par le même sommet (car on suppose les poids des arcs positif) donc un pcc est de longueur au plus |S|. Ainsi, P(|S|) et P(|S| + 1) impliquent que la |S|-ième et la |S| + 1-ième itérations sont les mêmes. On a donc au plus |S| itérations.
 
-Ainsi cet algorithme est en $O(|S|^3)$ 
+Ainsi cet algorithme est en $O(|S|*|A|)$ 
 
 = Comment décentraliser pour le protocole de routage dans un réseau
+
+
+= Remarques + questions
+_Si chemin ajouter pred taille |S| à null et pred[u]=v à la modification_ \
+_Cycle poids neg faire S itérations et à la fin si d[v]> d[u]+w(u,v) on a un cycle neg_

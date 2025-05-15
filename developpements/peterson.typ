@@ -120,6 +120,7 @@ void sortie_section(int process) {
 \
 Explication rapide des propriétés : \ \
 #underline[_Exclusion mutuelle :_ ]\
+*Faire temporrelle*\
   Supposons que P0 soit dans la section critique lorsque P1 y accède. Donc `entree[0]==true` et `entree[1]==true`.\
   Si P1 accède à la section critique c'est que `tour==1`, on cherche le test qui a permi à P0 d'accéder à la SC :
     - ca ne peut pas être `entree[1]==faux` car P1 à executé `entree[1]=vrai` et `tour=0` donc il ne peut rentrer en SC

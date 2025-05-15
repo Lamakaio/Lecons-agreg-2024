@@ -9,7 +9,7 @@
 
 #show: codly-init.with()
 #show: lecon.with(
-  titre: [Leçon 15 : Algorithme d'apprentissage supervisé et non supervidé. Exemples et applications.], 
+  titre: [Leçon 15 : Algorithme d'apprentissage supervisé et non supervisé. Exemples et applications.], 
   niveau: [MPI], 
   prerequis: [Arbres, algorithmes d'approximation])
 

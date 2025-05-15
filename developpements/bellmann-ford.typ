@@ -10,27 +10,26 @@
   prerequis: [Graphes])
 
 = Présentation et Motivations
-#text(fill:red)[à adapter en fonction de la lecon]
 
 Modélisation d'un réseau par un graphe où les routeurs sont des noeuds et les liens sont des arcs. 
 
 Le protocole RIP est un protocole à vecteur de distance.
-_Peut-être rajouter blabla réseau si leçon réseau_
 _En pratique très peut utilisé, que sur des réseau autonome (LAN)_
 
 On a des contraintes supplémentaires du protocole RIP :
 - Un seul noeud ne dois pas connaître toute la topologie du réseau, pour des raisons de sécurité et de stockage
 - Internet est par nautre un réseau décentralisé : Il n'y a pas d'autorité centrale. Qui doit alors se charger de calculer les chemins ? 
 
-L'avantage de l'algorithme de Bellmann-Ford est qu'il est possible de le faire de manière décentralisée, c'est à dire que chaque noeud fait la partie des calculs qui le concerne directement. 
-
-
-* Et comment on le décentralise ? *
-
-On remarque, dans l'algorithme ci-dessus, que, à chaque tour de boucle, chaque noeud `u` modifie seulement ses tables, et seulement en utilisant la table `D` de ses voisins. 
+Bellmann-Ford se décentralise bien. Comment ?
+On remarque, dans l'algorithme, que, à chaque tour de boucle, chaque noeud `u` modifie seulement ses tables, et seulement en utilisant la table `D` de ses voisins. 
 
 = Algorithme + exemple
 _Écrire le code en même temps que faire sur l'exemple d'abord init puis event_
+
+
+*Exemple :*
+#image("../img/bellman-ford-ex.jpg")
+
 
 #figure(caption: [Algorithme de Bellmann-Ford décentralisé], kind: "algorithme", supplement: [Algorithme])[
 #pseudocode-list(hooks: .5em, title: smallcaps[BELLMANN-FORD-DECENTRALISE ( u, V, w )], booktabs: true)[
@@ -56,14 +55,23 @@ _Écrire le code en même temps que faire sur l'exemple d'abord init puis event_
 ]
 ]
 
-*Exemple :*
-#image("../img/bellman-ford-ex.jpg")
+= Changement sur le réseau
+
+_A faire en dessin au tableau_
+
+A--1--B--1--C--1--D\
+Le lien A-B coupe, on peut avoir un bouclage à l'infini : \
+B envoie à C (A en 16), et D envoie à D (A en 4) donc C màj (A en 16) puis (A en 5) et renvoie à B (A en 5) ... 
+On remonte 1 par 1 jusqu'à 16.
+
+Solution : 
+On n'envoie pas les routeurs qui viennent du routeur auquel on envoie.
+Pas de boucle.
 
 = Preuve de terminaison, correction et complexité (de la version décentralisé)
 
 Invariant de boucle : \
-$D^i (t)$ : est la distance du sommet $s$ à $t$ avec un chemin qui contient au plus k arcs
-$P(i) : quote D^i (t) "est le plus court chemin (pcc) de" s" à" t "avec au plus" i "sauts." quote$
+$P(i) : quote D^i (t) "est la distance d'un plus court chemin (pcc) de" s" à" t "avec au plus" i "sauts." quote$
 
 *Démonstration :*\
 - $P(0)$ est vrai car le seul endroit où on peut aller en 0 sauts, c’est sur soi-même, qui est à distance 0
@@ -79,7 +87,4 @@ Ainsi, par principe de récurrence, $forall i in NN, P(i)$
 *Compléxité et Terminaison:* \
 De plus, un pcc ne passe pas deux fois par le même sommet (car on suppose les poids des arcs positif) donc un pcc est de longueur au plus |S|. Ainsi, P(|S|) et P(|S| + 1) impliquent que la |S|-ième et la |S| + 1-ième itérations sont les mêmes. On a donc au plus |S| itérations.
 
-Ainsi cet algorithme est en $O(|S|^3)$ 
-= Changement sur le réseau
-
-_Préparer au cas où on est du temps un exemple de lien qui pète_
+Ainsi cet algorithme est en $O(|S|*|A|)$ 

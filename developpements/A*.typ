@@ -38,7 +38,7 @@ On cherche donc à prendre en compte la position de la sortie.
 
 == Heuristique
 _Pour prendre en compte la position de la destination on va ajouter une heuristique. Mais comment la choisir ?
-_
+_\
 *Heuristique admissible* : \
 La fonction d'heuristique $h$ est dite admissible si, pour tout sommet $v$ tel qu'il existe un chemin de $v$ à _dst_ de longueur $d$, alors $h(v)<=d.$ _Autrement dit une heuristique admissible ne surestime jamais la distance à la destination._ On note l'hypothèse $h($_dst_$)=0$.
 
