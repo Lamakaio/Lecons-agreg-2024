@@ -124,6 +124,8 @@ Une machine ne lis que des 0 et des 1 sur un lien ! Comment les interpréter ?
   [Protocole réseau $arrow.r.hook$ ], rect(width:100%)[Entête réseau], rect(width:100%)[Entête transport], rect(width:100%)[Entête appli.], rect(width:100%)[Données],
 )
 
+#image("../img/reseau.png")
+
 = Des protocoles structurants
 == IP (v4)
 L'Internet Protocole (IP) est un protocole de la couche réseau ayant pour but d'acheminer les messages d'un hôte à l'autre. 
