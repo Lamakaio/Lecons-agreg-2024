@@ -145,7 +145,7 @@
 #def("Arbre rouge-noir")[
   ABR ou chaque noeud porte une couleur (noir ou rouge) et vérifie les propriété :
   1. le père d'un noeud rouge n'est jamais rouge
-  2. le nombre de noeuds noirs le long d'un chemin de la racine à une feuille est toujours le même.
+  2. le nombre de noeuds noirs le long d'un chemin de la racine à sous-arbre vide est toujours le même.
 ]
 
 #blk1("Propriété", "Hauteur ARN")[

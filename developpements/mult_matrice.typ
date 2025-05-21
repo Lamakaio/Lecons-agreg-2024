@@ -25,13 +25,23 @@
   On peut alors utiliser un algorithme probabiliste. On choisit un vecteur $r = (r_1,r_2,...,r_n)in {0,1}^n$. Ensuite on calcule A(Br) et Cr en $Theta(n^2)$. Si A(Br) $!=$ Cr alors AB $!=$ C sinon l'algorithme retourne AB = C.
 ]
 
+#blk2("Algorithme de test")[
+  #pseudocode-list(booktabs: true, hooks : .5em)[
+    *Vérification*(A,B,C,k) :
+    + *Pour* i de 1 à k :
+      + choisir r uniformément
+      + *Si* A(Br) $!=$ Cr :
+        + *Retourner* faux
+    + *Retourner* vrai 
+  ]
+]
+
 #blk3("Théorème")[
-  Si AB $!=$ C avec r choisi au hasard dans ${0,1}^n$, alors, \
+  Si AB $!=$ C alors, \
   $PP("ABr"="Cr")<=1/2$
 ]
 
-#blk2("Démonstration")[
-  L'évênement considéré est "ABr = Cr". \
+#underline[_Démonstration_]\
   Choisir r aléatoirement dans ${0,1}^n$ revient à choisir aléatoirement chaque $r_i$ dans ${0,1}$.\
 
   Soit D = AB-C $!=$ 0, ainsi ABr = Cr $=>$ Dr = 0 (car Dr = ABr - Cr). Puisque D $!=$ 0, il a au moins un coefficient non nul : on pose $d_11 !=$ 0\
@@ -40,13 +50,12 @@
   $ &sum_(j=1)^n d_(1j) r_j = 0 \
     =>&d_(11) r_1+ sum_(j=2)^n d_(1j) r_j = 0 \
    =>&r_1 = - (sum_(j=2)^n d_(1j) r_j)/d_(11)  && "(car "d_11 !=" 0)" $ 
-  
-  #blk2("Théorème : Loi des probabilités totale")[
+
+
+ #blk2("Théorème : Loi des probabilités totale")[
     Soit $E_1, E_2, ..., E_k$, k évênements disjoints dans $Omega$ tel que $union_(i=1)^k E_i = Omega$. Alors, 
     $ PP(B) = sum_(i=1)^k PP(B inter E_i) $
   ]
-  
-]
 
 #text[
   On peut supposer que l’on choisit $(r_2,..., r_n)$ uniformément dans ${0, 1}^(n-1)$ et $r_1$ uniformément dans  ${0,1}$. Ces deux tirages sont réalisés de manière indépendante.
@@ -62,16 +71,6 @@
 ]
 
 
-#blk2("Algorithme de test")[
-  #pseudocode-list(booktabs: true, hooks : .5em)[
-    *Vérification*(A,B,C,k) :
-    + *Pour* i de 1 à k :
-      + choisir r uniformément
-      + *Si* A(Br) $!=$ Cr :
-        + *Retourner* faux
-    + *Retourner* vrai 
-  ]
-]
 
 #blk2("Efficacité")[
   Si AB=C, l'algorithme renvoie la bonne réponse. Sinon en choisissant r de façon aléatoire et indépendante pour chaque essai, on obtient qu'après k essais, la probabilité d'erreur est au plus de $(1/2)^k =2^(-k)$. Donc notre algorithme réussi avec une probabilité d'au moins $1-2^k$ , en $Theta(k n^2)$.

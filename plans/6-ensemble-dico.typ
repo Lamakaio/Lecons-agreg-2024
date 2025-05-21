@@ -17,15 +17,11 @@
 = Définitions et motivations
 
 #def[Ensemble][
-  Un ensemble E en informatique, comme un ensemble en mathématique, est un rassemblement d'éléments distincts.
+  Un ensemble E en informatique, est comme un ensemble en mathématique.
   Ici la structure d'ensemble est abstraite, et possède les opérations : 
-  - inserer(E, x) : ajoute x à E s'il ne l'ai pas déjà
+  - inserer(E, x) : ajoute x à E s'il ne l'est pas déjà
   - supprimer(E,x) : enlève x de E s'il y est
   - rechercher(E,x) : renvoie vrai ssi x$in$ E
-]
-
-#blk2("Remarque")[
-  Un ensemble est une liste sans ordre.
 ]
 
 #blk2("Motivation")[
@@ -92,7 +88,7 @@
 #def("Arbre rouge-noir")[
   ABR ou chaque noeud porte une couleur (noir ou rouge) et vérifie les propriété :
   1. le père d'un noeud rouge n'est jamais rouge
-  2. le nombre de noeuds noirs le long d'un chemin de la racine à une feuille est toujours le même.
+  2. le nombre de noeuds noirs le long d'un chemin de la racine à un sous-arbre vide est toujours le même.
 ]
 
 #blk1("Propriété", "Hauteur ARN")[
@@ -102,7 +98,9 @@
 
 #dev[Insertion dans un arbre Rouge-Noir et preuve des propriétés]
 
-= Table de hashage
+En C++ std::map est implémenté par les ARN.
+
+== Table de hashage
 
 #def[Table de hashage][
   Structure de donnée qui permet de stocker un ensemble (dictionnaire) dans un tableau.\
@@ -130,6 +128,8 @@
   Si notre tableau est trop plein (on a trop de colision) il faut l'augmenter et pour cela changer la valeur de m, et recopier toutes les valeurs dans ce nouveau tableau.
 ]
 
+Les dictionnaires en python sont implémenté par des tables de hashage.
+
 #blk2("Compléxité")[
   Les complexités des opérations d'insertion, suppression et recherche dépendent donc du nombre de colision, et donc de la fonction de hashage. \
   Si on à 100% de colision on se retrouve à chercher dans une liste donc en $O(n)$.\
@@ -148,7 +148,12 @@
   )
 ]
 
-= Applications
+#blk2("Remarque")[
+  Les ensembles et les dictionnaires sont des structures qui semble simple mais on a beaucoup d'implémentations différentes et celle-ci peuvent être plus ou moins complexe.
+]
+
+= Applications 
+_ PEUT ETRE BOUGER LES APPLICATIONS AU FIL DES IMPLEMENTATIONS _
 
 == Sur les listes et tableaux
 
@@ -166,13 +171,16 @@
 #ex[
   Les dictionnaires peuvent permettre l'implémentation de cache, donc de mémoïsation pour la programmation dynamique. => mettre exemple
 ]
-== Graphe
-#ex[
-  On peut représenter un graphe par une liste d'adjacence, ou chaque sommet possède un dictionnaire avec comme clés les sommets de ses voisins et en valeurs le poids de l'arc si le graph est pondéré.
-]
+
 == Analyse du texte
 #ex[
   Comptage occurences mot ou lettre grâce à un dictionnaire. Peut être utile pour Huffman.
 ]
+
+== Graphe
+#ex[
+  On peut représenter un graphe par une liste d'adjacence, ou chaque sommet possède un dictionnaire avec comme clés les sommets de ses voisins et en valeurs le poids de l'arc si le graph est pondéré.
+]
+
 
 
